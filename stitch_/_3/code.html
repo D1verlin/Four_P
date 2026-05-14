@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Расписания - UrbanTransit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#5d4034",
+                        "on-secondary-fixed-variant": "#5d4034",
+                        "on-secondary": "#442a20",
+                        "inverse-surface": "#e3e2e2",
+                        "error": "#ffb4ab",
+                        "on-background": "#e3e2e2",
+                        "primary": "#ffb599",
+                        "on-primary-container": "#ffdbce",
+                        "surface": "#121414",
+                        "on-primary": "#5a1c00",
+                        "inverse-on-surface": "#303031",
+                        "outline": "#919191",
+                        "primary-container": "#7b2f0a",
+                        "on-primary-fixed-variant": "#7b2f0a",
+                        "on-tertiary-container": "#f1e3a8",
+                        "error-container": "#93000a",
+                        "surface-variant": "#343535",
+                        "on-tertiary-fixed-variant": "#50471b",
+                        "surface-container": "#1f2020",
+                        "surface-container-high": "#292a2a",
+                        "secondary": "#e7bdae",
+                        "surface-tint": "#ffb599",
+                        "on-surface": "#e3e2e2",
+                        "on-surface-variant": "#c6c6c6",
+                        "tertiary-fixed": "#f1e3a8",
+                        "primary-fixed": "#ffdbce",
+                        "outline-variant": "#474747",
+                        "on-primary-fixed": "#370e00",
+                        "tertiary-fixed-dim": "#d4c78e",
+                        "surface-container-low": "#1b1c1c",
+                        "primary-fixed-dim": "#ffb599",
+                        "on-error": "#690005",
+                        "surface-dim": "#121414",
+                        "secondary-fixed": "#ffdbce",
+                        "on-secondary-container": "#ffdbce",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#393939",
+                        "on-tertiary-fixed": "#211b00",
+                        "on-secondary-fixed": "#2c160c",
+                        "on-tertiary": "#383006",
+                        "tertiary-container": "#50471b",
+                        "background": "#121414",
+                        "surface-container-highest": "#343535",
+                        "tertiary": "#d4c78e",
+                        "surface-container-lowest": "#0d0e0f",
+                        "secondary-fixed-dim": "#e7bdae",
+                        "inverse-primary": "#9a4520"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "margin-desktop": "32px",
+                        "xs": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 flex justify-between items-center px-6 py-3 w-full bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
+<div class="flex items-center gap-md">
+<div class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-600 dark:text-orange-500" data-weight="fill" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+                UrbanTransit
+            </div>
+<div class="hidden md:flex gap-6 ml-8">
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors font-label-lg text-label-lg hover:bg-zinc-900 rounded-md px-3 py-2 active:scale-95 transition-transform duration-150" href="#">Plan</a>
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors font-label-lg text-label-lg hover:bg-zinc-900 rounded-md px-3 py-2 active:scale-95 transition-transform duration-150" href="#">Favorites</a>
+<a class="text-orange-500 font-bold border-b-2 border-orange-500 pb-1 font-label-lg text-label-lg hover:bg-zinc-900 rounded-md px-3 py-2 active:scale-95 transition-transform duration-150" href="#">Schedules</a>
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors font-label-lg text-label-lg hover:bg-zinc-900 rounded-md px-3 py-2 active:scale-95 transition-transform duration-150" href="#">Notifications</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400">search</span>
+<input class="bg-surface-container text-on-surface border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-1 focus:ring-primary w-64 placeholder-zinc-500" placeholder="Поиск маршрута..." type="text"/>
+</div>
+<button class="text-zinc-400 hover:text-zinc-200 p-2 rounded-full hover:bg-zinc-900 transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col md:flex-row gap-md p-margin-mobile md:p-margin-desktop max-w-[1280px] mx-auto w-full">
+<!-- Left Sidebar: Filters & Popular Routes -->
+<aside class="w-full md:w-1/3 lg:w-1/4 flex flex-col gap-md shrink-0">
+<!-- Mobile Search (Visible only on small screens) -->
+<div class="relative sm:hidden">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400">search</span>
+<input class="w-full bg-surface-container text-on-surface border-none rounded-lg py-3 pl-10 pr-4 focus:ring-1 focus:ring-primary placeholder-zinc-500" placeholder="Поиск маршрута..." type="text"/>
+</div>
+<!-- Transport Modes Bento -->
+<div class="bg-surface-container rounded-xl p-sm grid grid-cols-2 gap-base border border-outline-variant/30">
+<button class="bg-primary/10 border border-primary/20 rounded-lg p-sm flex flex-col items-center justify-center gap-2 hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+<span class="font-label-sm text-label-sm text-on-surface">Автобус</span>
+</button>
+<button class="bg-surface-variant rounded-lg p-sm flex flex-col items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-tertiary text-3xl">tram</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Трамвай</span>
+</button>
+<button class="bg-surface-variant rounded-lg p-sm flex flex-col items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">train</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Метро</span>
+</button>
+<button class="bg-surface-variant rounded-lg p-sm flex flex-col items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">commute</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Троллейбус</span>
+</button>
+</div>
+<!-- Popular Routes List -->
+<div class="bg-surface-container rounded-xl p-md border border-outline-variant/30 flex flex-col gap-sm flex-grow">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Популярные маршруты</h3>
+<div class="flex flex-col gap-2">
+<button class="flex items-center justify-between p-sm rounded-lg bg-surface-container-high border border-primary/30 hover:border-primary/50 transition-colors text-left group">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container text-on-secondary-container w-10 h-10 rounded-full flex items-center justify-center font-headline-md text-headline-md">15</div>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Центр - Аэропорт</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Каждые 10 мин
+                                </div>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-high border border-transparent hover:border-outline-variant/30 transition-colors text-left">
+<div class="flex items-center gap-3">
+<div class="bg-surface-variant text-on-surface-variant w-10 h-10 rounded-full flex items-center justify-center font-headline-md text-headline-md">42</div>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Северный вокзал - Южный парк</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Каждые 15 мин
+                                </div>
+</div>
+</div>
+</button>
+<button class="flex items-center justify-between p-sm rounded-lg hover:bg-surface-container-high border border-transparent hover:border-outline-variant/30 transition-colors text-left">
+<div class="flex items-center gap-3">
+<div class="bg-surface-variant text-on-surface-variant w-10 h-10 rounded-full flex items-center justify-center font-headline-md text-headline-md">8</div>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Университет - Пл. Победы</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Каждые 8 мин
+                                </div>
+</div>
+</div>
+</button>
+</div>
+</div>
+</aside>
+<!-- Right Content: Detailed Schedule -->
+<section class="flex-grow flex flex-col gap-md">
+<!-- Route Header Glassmorphism -->
+<div class="bg-surface-container-highest/80 backdrop-blur-xl rounded-xl p-md border border-outline-variant/20 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+<div class="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div class="flex items-center gap-md">
+<div class="bg-primary text-on-primary w-16 h-16 rounded-2xl flex items-center justify-center font-headline-xl text-headline-xl shadow-lg shadow-primary/20">
+                            15
+                        </div>
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Центр - Аэропорт</h1>
+<div class="flex items-center gap-4 mt-1">
+<span class="bg-secondary/20 text-secondary px-2 py-1 rounded font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">directions_bus</span> Автобус
+                                </span>
+<span class="text-on-surface-variant font-body-md text-body-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">update</span> Обновлено только что
+                                </span>
+</div>
+</div>
+</div>
+<div class="flex gap-2 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none bg-surface-variant hover:bg-surface-container-high text-on-surface px-4 py-2 rounded-lg font-label-lg text-label-lg flex items-center justify-center gap-2 transition-colors border border-outline-variant/30">
+<span class="material-symbols-outlined">swap_horiz</span> В обратную
+                        </button>
+<button class="bg-surface-variant hover:bg-surface-container-high text-on-surface p-2 rounded-lg transition-colors border border-outline-variant/30 flex items-center justify-center">
+<span class="material-symbols-outlined">favorite_border</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Schedule Grid -->
+<div class="bg-surface-container rounded-xl border border-outline-variant/30 flex-grow flex flex-col">
+<!-- Time Filters -->
+<div class="border-b border-outline-variant/30 p-sm flex gap-2 overflow-x-auto">
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-label-lg text-label-lg whitespace-nowrap">Сейчас</button>
+<button class="bg-surface-variant text-on-surface-variant hover:text-on-surface px-4 py-1.5 rounded-full font-label-lg text-label-lg whitespace-nowrap transition-colors">Утро (06:00 - 12:00)</button>
+<button class="bg-surface-variant text-on-surface-variant hover:text-on-surface px-4 py-1.5 rounded-full font-label-lg text-label-lg whitespace-nowrap transition-colors">День (12:00 - 18:00)</button>
+<button class="bg-surface-variant text-on-surface-variant hover:text-on-surface px-4 py-1.5 rounded-full font-label-lg text-label-lg whitespace-nowrap transition-colors">Вечер (18:00 - 24:00)</button>
+</div>
+<!-- Schedule Table/List -->
+<div class="p-md flex flex-col gap-0 relative">
+<!-- Vertical tracking line -->
+<div class="absolute left-[47px] top-md bottom-md w-[2px] bg-outline-variant/30 z-0 hidden sm:block"></div>
+<!-- Stop Item 1 (Past) -->
+<div class="flex flex-col sm:flex-row gap-4 sm:gap-lg py-sm relative z-10 opacity-50">
+<div class="w-full sm:w-24 flex sm:flex-col justify-between sm:justify-start items-center sm:items-end text-on-surface-variant font-body-lg text-body-lg pt-1">
+<span>14:05</span>
+</div>
+<div class="hidden sm:flex items-center justify-center w-6 h-6 rounded-full bg-surface border-2 border-outline-variant mt-1"></div>
+<div class="flex-grow bg-surface-container-high rounded-lg p-sm border border-outline-variant/20">
+<h4 class="font-headline-md text-headline-md text-on-surface">Центральный автовокзал</h4>
+</div>
+</div>
+<!-- Stop Item 2 (Active/Next) -->
+<div class="flex flex-col sm:flex-row gap-4 sm:gap-lg py-sm relative z-10">
+<div class="w-full sm:w-24 flex sm:flex-col justify-between sm:justify-start items-center sm:items-end text-primary font-headline-md text-headline-md pt-1">
+<span>14:15</span>
+<span class="text-error font-label-sm text-label-sm sm:mt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span> Опаздывает</span>
+</div>
+<div class="hidden sm:flex items-center justify-center w-6 h-6 rounded-full bg-surface border-2 border-primary mt-1 relative">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<div class="absolute -top-full h-full w-[2px] bg-primary"></div>
+</div>
+<div class="flex-grow bg-secondary-container/20 rounded-lg p-sm border border-primary/30 shadow-[0_0_15px_rgba(255,181,153,0.1)]">
+<h4 class="font-headline-md text-headline-md text-on-surface">Улица Пушкина</h4>
+<div class="text-on-surface-variant font-body-md text-body-md mt-1">Пересадка на трамвай 3, 5</div>
+</div>
+</div>
+<!-- Stop Item 3 (Future) -->
+<div class="flex flex-col sm:flex-row gap-4 sm:gap-lg py-sm relative z-10">
+<div class="w-full sm:w-24 flex sm:flex-col justify-between sm:justify-start items-center sm:items-end text-on-surface font-body-lg text-body-lg pt-1">
+<span>14:28</span>
+</div>
+<div class="hidden sm:flex items-center justify-center w-6 h-6 rounded-full bg-surface border-2 border-outline-variant mt-1"></div>
+<div class="flex-grow bg-surface-container-low rounded-lg p-sm border border-outline-variant/10">
+<h4 class="font-headline-md text-headline-md text-on-surface">Торговый центр "Галерея"</h4>
+</div>
+</div>
+<!-- Stop Item 4 (Future - Terminal) -->
+<div class="flex flex-col sm:flex-row gap-4 sm:gap-lg py-sm relative z-10">
+<div class="w-full sm:w-24 flex sm:flex-col justify-between sm:justify-start items-center sm:items-end text-on-surface font-body-lg text-body-lg pt-1">
+<span>14:45</span>
+</div>
+<div class="hidden sm:flex items-center justify-center w-6 h-6 rounded-full bg-surface border-2 border-outline-variant mt-1">
+<span class="material-symbols-outlined text-[16px] text-outline-variant">flight_takeoff</span>
+</div>
+<div class="flex-grow bg-surface-container-low rounded-lg p-sm border border-outline-variant/10">
+<h4 class="font-headline-md text-headline-md text-on-surface">Международный Аэропорт</h4>
+<div class="text-tertiary font-body-md text-body-md mt-1">Конечная станция</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-6 flex flex-col md:flex-row justify-between items-center gap-4 mt-auto bg-zinc-950 border-t border-zinc-800">
+<div class="text-lg font-bold text-zinc-200 font-['Plus_Jakarta_Sans']">
+            © 2024 Urban Transit System. All rights reserved.
+        </div>
+<div class="flex flex-wrap gap-4 justify-center">
+<a class="text-zinc-500 hover:text-zinc-300 hover:text-white transition-colors cursor-pointer font-['Plus_Jakarta_Sans'] text-sm" href="#">Privacy Policy</a>
+<a class="text-zinc-500 hover:text-zinc-300 hover:text-white transition-colors cursor-pointer font-['Plus_Jakarta_Sans'] text-sm" href="#">Terms of Service</a>
+<a class="text-zinc-500 hover:text-zinc-300 hover:text-white transition-colors cursor-pointer font-['Plus_Jakarta_Sans'] text-sm" href="#">Help Center</a>
+<a class="text-zinc-500 hover:text-zinc-300 hover:text-white transition-colors cursor-pointer font-['Plus_Jakarta_Sans'] text-sm" href="#">Contact</a>
+</div>
+</footer>
+</body></html>

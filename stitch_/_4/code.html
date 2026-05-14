@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Уведомления - UrbanTransit</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#5d4034",
+                        "on-secondary-fixed-variant": "#5d4034",
+                        "on-secondary": "#442a20",
+                        "inverse-surface": "#e3e2e2",
+                        "error": "#ffb4ab",
+                        "on-background": "#e3e2e2",
+                        "primary": "#ffb599",
+                        "on-primary-container": "#ffdbce",
+                        "surface": "#121414",
+                        "on-primary": "#5a1c00",
+                        "inverse-on-surface": "#303031",
+                        "outline": "#919191",
+                        "primary-container": "#7b2f0a",
+                        "on-primary-fixed-variant": "#7b2f0a",
+                        "on-tertiary-container": "#f1e3a8",
+                        "error-container": "#93000a",
+                        "surface-variant": "#343535",
+                        "on-tertiary-fixed-variant": "#50471b",
+                        "surface-container": "#1f2020",
+                        "surface-container-high": "#292a2a",
+                        "secondary": "#e7bdae",
+                        "surface-tint": "#ffb599",
+                        "on-surface": "#e3e2e2",
+                        "on-surface-variant": "#c6c6c6",
+                        "tertiary-fixed": "#f1e3a8",
+                        "primary-fixed": "#ffdbce",
+                        "outline-variant": "#474747",
+                        "on-primary-fixed": "#370e00",
+                        "tertiary-fixed-dim": "#d4c78e",
+                        "surface-container-low": "#1b1c1c",
+                        "primary-fixed-dim": "#ffb599",
+                        "on-error": "#690005",
+                        "surface-dim": "#121414",
+                        "secondary-fixed": "#ffdbce",
+                        "on-secondary-container": "#ffdbce",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#393939",
+                        "on-tertiary-fixed": "#211b00",
+                        "on-secondary-fixed": "#2c160c",
+                        "on-tertiary": "#383006",
+                        "tertiary-container": "#50471b",
+                        "background": "#121414",
+                        "surface-container-highest": "#343535",
+                        "tertiary": "#d4c78e",
+                        "surface-container-lowest": "#0d0e0f",
+                        "secondary-fixed-dim": "#e7bdae",
+                        "inverse-primary": "#9a4520"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "base": "8px",
+                        "gutter": "16px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "sm": "12px",
+                        "margin-desktop": "32px",
+                        "xs": "4px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #121414; /* Fallback for bg-background */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 flex justify-between items-center px-6 py-3 w-full bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 font-['Plus_Jakarta_Sans'] antialiased">
+<div class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-600 dark:text-orange-500">directions_transit</span>
+            UrbanTransit
+        </div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors hover:bg-zinc-900 rounded-md transition-all active:scale-95 transition-transform duration-150 px-3 py-2" href="#">Plan</a>
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors hover:bg-zinc-900 rounded-md transition-all active:scale-95 transition-transform duration-150 px-3 py-2" href="#">Favorites</a>
+<a class="text-zinc-400 hover:text-zinc-200 transition-colors hover:bg-zinc-900 rounded-md transition-all active:scale-95 transition-transform duration-150 px-3 py-2" href="#">Schedules</a>
+<a class="text-orange-500 font-bold border-b-2 border-orange-500 pb-1 px-3 py-2" href="#">Notifications</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-zinc-400 hover:text-zinc-200 transition-colors hover:bg-zinc-900 rounded-md p-2 active:scale-95">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-md md:py-xl flex flex-col gap-lg">
+<!-- Header Section -->
+<header class="flex flex-col gap-sm">
+<h1 class="font-headline-xl text-headline-xl text-on-background">Центр уведомлений</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Оперативная информация о состоянии транспортной сети, изменениях в расписании и экстренных ситуациях на ваших избранных маршрутах.</p>
+<!-- Filter Chips -->
+<div class="flex flex-wrap gap-xs mt-sm">
+<button class="bg-primary-container text-on-primary-container font-label-lg text-label-lg px-4 py-2 rounded-full transition-colors">
+                    Все
+                </button>
+<button class="bg-surface-variant text-on-surface-variant hover:bg-surface-bright hover:text-on-surface font-label-lg text-label-lg px-4 py-2 rounded-full transition-colors">
+                    Сбои
+                </button>
+<button class="bg-surface-variant text-on-surface-variant hover:bg-surface-bright hover:text-on-surface font-label-lg text-label-lg px-4 py-2 rounded-full transition-colors">
+                    Задержки
+                </button>
+</div>
+</header>
+<!-- Notifications Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Card: Disruption (Red/Error) -->
+<div class="bg-surface-container rounded-xl p-md flex flex-col gap-sm border-l-4 border-error relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-error/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider">Критический сбой</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Только что</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Движение парализовано</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Авария на центральном проспекте блокирует движение маршрутов 42, 15 и 8. Ожидаются значительные задержки. Рекомендуется использовать объездные пути.</p>
+<div class="mt-auto pt-sm flex gap-2">
+<span class="bg-surface-variant text-on-surface font-label-sm text-label-sm px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">directions_bus</span> Автобус 42
+                    </span>
+<span class="bg-surface-variant text-on-surface font-label-sm text-label-sm px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">tram</span> Трамвай 15
+                    </span>
+</div>
+</div>
+<!-- Card: Delay (Orange/Primary) -->
+<div class="bg-surface-container rounded-xl p-md flex flex-col gap-sm border-l-4 border-primary relative overflow-hidden hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">schedule</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider">Задержка</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">15 мин назад</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Отклонение от расписания</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Троллейбус маршрута 7 задерживается примерно на 15-20 минут из-за плотного трафика на Южной магистрали.</p>
+<div class="mt-auto pt-sm">
+<span class="bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm px-2 py-1 rounded-md flex items-center gap-1 inline-flex">
+<span class="material-symbols-outlined text-[14px]">directions_transit</span> Троллейбус 7
+                    </span>
+</div>
+</div>
+<!-- Card: General Info (Neutral) -->
+<div class="bg-surface-container rounded-xl p-md flex flex-col gap-sm relative overflow-hidden hover:bg-surface-container-high transition-colors md:col-span-2 lg:col-span-1">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">info</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider">Информация</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 часа назад</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Изменение остановки</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">В связи с ремонтными работами, остановка "Парк Культуры" временно перенесена на 100 метров вперед по ходу движения.</p>
+<button class="mt-auto pt-sm text-primary font-label-lg text-label-lg flex items-center gap-1 hover:underline w-fit">
+                    Показать на карте <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<!-- Card: Delay (Orange/Primary) - Another Example -->
+<div class="bg-surface-container rounded-xl p-md flex flex-col gap-sm border-l-4 border-primary relative overflow-hidden hover:bg-surface-container-high transition-colors lg:col-span-2">
+<div class="flex flex-col md:flex-row gap-md items-start">
+<div class="flex-grow flex flex-col gap-sm">
+<div class="flex justify-between items-start w-full">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">construction</span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider">Плановые работы</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Вчера</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Ремонт путей на Северной линии</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">В выходные дни движение трамваев по Северной линии будет ограничено. Предоставляются компенсационные автобусные маршруты (КМ). Пожалуйста, планируйте поездки заранее.</p>
+<div class="mt-auto pt-sm flex gap-2">
+<span class="bg-surface-variant text-on-surface font-label-sm text-label-sm px-2 py-1 rounded-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">tram</span> Северная линия
+                            </span>
+</div>
+</div>
+<div class="w-full md:w-48 h-32 bg-surface-variant rounded-lg overflow-hidden flex-shrink-0 relative">
+<img alt="Construction Map" class="w-full h-full object-cover opacity-60" data-alt="A detailed digital map interface showing a city's public transit network, specifically focusing on a section under construction marked with orange and red hazard stripes. The map uses a dark mode aesthetic with deep black backgrounds, subtle grey roads, and vibrant neon orange routes highlighting the affected transport lines. The lighting is artificial and screen-like, creating a modern, technical, and highly legible visual style typical of an advanced transit application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQFxMo2qUmaVeZ6G6pMZVIcfnyub_LwJ_ie8TgfpLnlxD2_ssl-ALmYo-_uhHB8lKLU4p2tZDjMscl5OX9bfTinqglekWnWeHCrpVySHAFS_815pv67P7UPs-78ElbcdirMuDmF6D6gvstz5IY5ztHI7mJ0ZreANqr0VUmKNL0nutvFqE14kKx-9oKJ4lurNDUZv2s4doTs_rLNSw-EMc49MIbjRbyO1CHPYyx3_v11qqqEdT4ep57Dvk0aUKtqbBzvYjd0WzMLaU"/>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-6 flex flex-col md:flex-row justify-between items-center gap-4 mt-auto bg-zinc-950 border-t border-zinc-800 font-['Plus_Jakarta_Sans'] text-sm">
+<div class="text-lg font-bold text-zinc-200">
+            UrbanTransit
+        </div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-zinc-500 hover:text-white hover:text-zinc-300 transition-colors cursor-pointer" href="#">Privacy Policy</a>
+<a class="text-zinc-500 hover:text-white hover:text-zinc-300 transition-colors cursor-pointer" href="#">Terms of Service</a>
+<a class="text-zinc-500 hover:text-white hover:text-zinc-300 transition-colors cursor-pointer" href="#">Help Center</a>
+<a class="text-zinc-500 hover:text-white hover:text-zinc-300 transition-colors cursor-pointer" href="#">Contact</a>
+</div>
+<div class="text-zinc-500">
+            © 2024 Urban Transit System. All rights reserved.
+        </div>
+</footer>
+</body></html>

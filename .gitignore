@@ -1,0 +1,59 @@
+# ==========================================
+# Root .gitignore for Urban Transit System
+# Covers: ASP.NET Core (C#) & React/Vite/Node
+# ==========================================
+
+# --- OS-specific files ---
+.DS_Store
+.DS_Store?
+$_ANDI_
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# --- IDEs / Editors / User-specific configurations ---
+.vs/
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# --- Node / React (transit-client) ---
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/build/
+**/*.local
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+**/lerna-debug.log*
+**/package-lock.json.bak
+
+# --- .NET Core / ASP.NET (TransitApi) ---
+**/bin/
+**/obj/
+**/App_Data/
+**/*.gpState
+**/*.db-shm
+**/*.db-wal
+
+# Backup / publish directories
+**/publish/
+**/out/
+
+# --- SQLite Databases ---
+# Excluding SQLite database backup/temporary files but keeping the main transit.db
+# if it is tracked as the default seeded SQLite database for this project.
+# To completely ignore transit.db, uncomment the line below:
+# **/transit.db
