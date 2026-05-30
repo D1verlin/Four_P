@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace TransitApi.Models;
 
 
@@ -9,5 +11,6 @@ public class Schedule
     
     public TimeOnly DepartureTime { get; set; }
 
+    [JsonIgnore]
     public TransitRoute Route { get; set; } = null!;
 }

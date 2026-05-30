@@ -6,6 +6,7 @@ const typeConfig = {
     border: 'border-error',
     icon: 'warning',
     iconColor: 'text-error',
+    bg: 'bg-error/5',
     label: 'Критический сбой',
     glow: 'absolute -right-4 -top-4 w-24 h-24 bg-error/10 rounded-full blur-2xl pointer-events-none'
   },
@@ -13,6 +14,7 @@ const typeConfig = {
     border: 'border-primary',
     icon: 'schedule',
     iconColor: 'text-primary',
+    bg: 'bg-primary/5',
     label: 'Задержка',
     glow: null
   },
@@ -20,13 +22,15 @@ const typeConfig = {
     border: 'border-outline-variant',
     icon: 'info',
     iconColor: 'text-secondary',
+    bg: '',
     label: 'Информация',
     glow: null
   },
   Maintenance: {
-    border: 'border-primary',
+    border: 'border-tertiary',
     icon: 'construction',
-    iconColor: 'text-primary',
+    iconColor: 'text-tertiary',
+    bg: 'bg-tertiary/5',
     label: 'Плановые работы',
     glow: null
   }
@@ -53,10 +57,10 @@ export default function Notifications() {
   useEffect(() => { load(); }, []);
 
   const filters = [
-    { id: null, label: 'Все' },
-    { id: 'Disruption', label: 'Сбои' },
-    { id: 'Delay', label: 'Задержки' },
-    { id: 'Maintenance', label: 'Плановые работы' },
+    { id: null,          label: 'Все',             icon: 'notifications' },
+    { id: 'Disruption',  label: 'Сбои',            icon: 'warning' },
+    { id: 'Delay',       label: 'Задержки',        icon: 'schedule' },
+    { id: 'Maintenance', label: 'Тех. работы',     icon: 'construction' },
   ];
 
   const handleFilter = (type) => {
@@ -65,69 +69,70 @@ export default function Notifications() {
   };
 
   return (
-    <main className="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-md md:py-xl flex flex-col gap-lg pb-[100px] md:pb-lg">
-      {}
-      <header className="flex flex-col gap-sm">
-        <h1 className="font-headline-xl text-headline-xl text-on-background">Центр уведомлений</h1>
-        <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-          Оперативная информация о состоянии транспортной сети, изменениях в расписании и экстренных ситуациях.
+    <main className="flex-grow w-full max-w-[1280px] mx-auto px-4 md:px-8 py-4 md:py-6 flex flex-col gap-5 pb-[80px] md:pb-6">
+      {/* Header */}
+      <header className="flex flex-col gap-3">
+        <h1 className="text-2xl md:text-3xl font-bold text-on-background">Центр уведомлений</h1>
+        <p className="text-sm text-on-surface-variant max-w-xl">
+          Оперативная информация о состоянии транспортной сети Бреста.
         </p>
-        {}
-        <div className="flex flex-wrap gap-xs mt-sm">
+        <div className="flex flex-wrap gap-2">
           {filters.map(f => (
             <button
               key={String(f.id)}
               id={`notif-filter-${f.id || 'all'}`}
               onClick={() => handleFilter(f.id)}
-              className={`font-label-lg text-label-lg px-4 py-2 rounded-full transition-colors ${
+              className={`btn-chip text-sm font-semibold px-3 py-2 rounded-full flex items-center gap-1.5 ${
                 activeFilter === f.id
                   ? 'bg-primary-container text-on-primary-container'
                   : 'bg-surface-variant text-on-surface-variant hover:bg-surface-bright hover:text-on-surface'
               }`}
             >
+              <span className="material-symbols-outlined text-[16px]">{f.icon}</span>
               {f.label}
             </button>
           ))}
         </div>
       </header>
 
-      {}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+      {/* Cards grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
         {loading && (
-          <div className="col-span-3 text-center py-12 text-on-surface-variant font-body-md text-body-md">
-            Загрузка уведомлений...
+          <div className="col-span-3 text-center py-16 text-on-surface-variant flex flex-col items-center gap-3">
+            <span className="material-symbols-outlined animate-spin text-4xl text-outline">progress_activity</span>
+            <span className="text-sm">Загрузка уведомлений...</span>
           </div>
         )}
         {!loading && notifications.length === 0 && (
-          <div className="col-span-3 bg-surface-container rounded-xl p-md text-center text-on-surface-variant font-body-md text-body-md">
+          <div className="col-span-3 bg-surface-container rounded-2xl p-8 text-center text-on-surface-variant text-sm">
+            <span className="material-symbols-outlined text-5xl block mb-3 text-outline">notifications_off</span>
             Нет уведомлений
           </div>
         )}
-        {notifications.map((n, i) => {
+        {notifications.map((n) => {
           const cfg = typeConfig[n.type] || typeConfig.Info;
           const isWide = n.type === 'Maintenance';
           return (
             <div
               key={n.id}
-              className={`bg-surface-container rounded-xl p-md flex flex-col gap-sm border-l-4 ${cfg.border} relative overflow-hidden group hover:bg-surface-container-high transition-colors ${isWide ? 'md:col-span-2 lg:col-span-2' : ''}`}
+              className={`card-hover bg-surface-container rounded-2xl p-4 flex flex-col gap-3 border-l-4 ${cfg.border} ${cfg.bg} relative overflow-hidden ${isWide ? 'md:col-span-2 lg:col-span-2' : ''}`}
             >
               {cfg.glow && <div className={cfg.glow}></div>}
-              <div className="flex justify-between items-start">
+              <div className="flex justify-between items-start gap-2">
                 <div className={`flex items-center gap-2 ${cfg.iconColor}`}>
-                  <span className="material-symbols-outlined" style={{fontVariationSettings:"'FILL' 1"}}>{cfg.icon}</span>
-                  <span className="font-label-lg text-label-lg uppercase tracking-wider">{cfg.label}</span>
+                  <span className="material-symbols-outlined text-[20px]" style={{fontVariationSettings:"'FILL' 1"}}>{cfg.icon}</span>
+                  <span className="text-xs font-bold uppercase tracking-wider">{cfg.label}</span>
                 </div>
-                <span className="font-label-sm text-label-sm text-on-surface-variant">{n.timeAgo}</span>
+                <span className="text-xs text-on-surface-variant flex-shrink-0">{n.timeAgo}</span>
               </div>
-              <h3 className="font-headline-md text-headline-md text-on-surface">{n.title}</h3>
-              <p className="font-body-md text-body-md text-on-surface-variant">{n.message}</p>
+              <h3 className="text-base font-bold text-on-surface leading-tight">{n.title}</h3>
+              <p className="text-sm text-on-surface-variant leading-relaxed">{n.message}</p>
 
-              {}
               {n.affectedRoutes && (
-                <div className="mt-auto pt-sm flex flex-wrap gap-2">
+                <div className="mt-auto pt-2 flex flex-wrap gap-1.5">
                   {routeIcons(n.affectedRoutes).map((r, ri) => (
-                    <span key={ri} className="bg-surface-variant text-on-surface font-label-sm text-label-sm px-2 py-1 rounded-md flex items-center gap-1">
-                      <span className="material-symbols-outlined text-[14px]">directions_bus</span>
+                    <span key={ri} className="bg-surface-variant text-on-surface text-xs font-semibold px-2.5 py-1 rounded-lg flex items-center gap-1">
+                      <span className="material-symbols-outlined text-[13px]">directions_bus</span>
                       Маршрут {r}
                     </span>
                   ))}

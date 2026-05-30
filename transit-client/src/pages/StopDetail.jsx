@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { stopsApi } from '../api';
+import { useToast } from '../components/ToastContext';
 
 const transportIcons = { Bus: 'directions_bus', Trolleybus: 'commute', Tram: 'tram', Minibus: 'airport_shuttle' };
 const transportLabels = { Bus: 'Автобусы', Trolleybus: 'Троллейбусы', Tram: 'Трамваи', Minibus: 'Маршрутки' };
@@ -20,6 +21,7 @@ const timeColors = {
 export default function StopDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const [stop, setStop] = useState(null);
   const [arrivals, setArrivals] = useState([]);
   const [activeType, setActiveType] = useState(null);
@@ -56,34 +58,48 @@ export default function StopDetail() {
   const types = ['Bus', 'Tram', 'Minibus'];
 
   return (
-    <main className="flex-grow w-full max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-md flex flex-col gap-lg pb-[100px] md:pb-lg">
-      {}
-      <header className="flex flex-col gap-base">
-        <div className="flex items-center gap-sm">
-          <button className="text-on-surface-variant hover:text-on-surface transition-colors" onClick={() => navigate(-1)}>
+    <main className="flex-grow w-full max-w-[1280px] mx-auto px-4 md:px-8 py-4 md:py-6 flex flex-col gap-5 pb-[80px] md:pb-6">
+      {/* Header */}
+      <header className="flex flex-col gap-2">
+        <div className="flex items-center gap-3">
+          <button
+            className="btn-icon text-on-surface-variant hover:text-on-surface p-1.5 rounded-full hover:bg-surface-variant"
+            onClick={() => navigate(-1)}
+          >
             <span className="material-symbols-outlined">arrow_back</span>
           </button>
-          <h1 className="font-headline-lg text-headline-lg text-on-surface">
+          <h1 className="text-xl md:text-2xl font-bold text-on-surface leading-tight">
             {stop ? `Остановка «${stop.name}»` : 'Загрузка...'}
           </h1>
+          {stop && (
+            <button
+              className="btn-icon text-primary hover:text-primary-fixed ml-auto"
+              onClick={() => {
+                const saved = JSON.parse(localStorage.getItem('favStops') || '[]');
+                if (!saved.includes(stop.id)) {
+                  localStorage.setItem('favStops', JSON.stringify([...saved, stop.id]));
+                  showToast('Остановка добавлена в избранное!', 'success');
+                } else {
+                  showToast('Остановка уже в избранном!', 'info');
+                }
+              }}
+            >
+              <span className="material-symbols-outlined">favorite_border</span>
+            </button>
+          )}
         </div>
-        {stop && (
-          <p className="font-body-md text-body-md text-on-surface-variant pl-[44px]">
-            Направление: {stop.direction} — {stop.address}
-          </p>
-        )}
       </header>
 
-      {}
-      <section className="flex flex-wrap gap-sm">
+      {/* Filter chips */}
+      <section className="flex flex-wrap gap-2">
         <button
           id="filter-all"
           onClick={clearFilter}
-          className={`font-label-lg text-label-lg px-4 py-2 rounded-full border flex items-center gap-xs transition-colors ${
+          className={`btn-chip text-sm font-semibold px-3 py-2 rounded-full border flex items-center gap-1.5 ${
             !activeType ? 'bg-primary text-on-primary border-primary' : 'bg-surface-variant text-on-surface-variant border-outline-variant hover:bg-surface-container-high'
           }`}
         >
-          <span className="material-symbols-outlined text-[18px]" style={{fontVariationSettings: !activeType ? "'FILL' 1" : "'FILL' 0"}}>directions_bus</span>
+          <span className="material-symbols-outlined text-[16px]" style={{fontVariationSettings: !activeType ? "'FILL' 1" : "'FILL' 0"}}>directions_bus</span>
           Все
         </button>
         {types.map(t => (
@@ -91,55 +107,59 @@ export default function StopDetail() {
             key={t}
             id={`filter-${t.toLowerCase()}`}
             onClick={() => filterType(t)}
-            className={`font-label-lg text-label-lg px-4 py-2 rounded-full border flex items-center gap-xs transition-colors ${
+            className={`btn-chip text-sm font-semibold px-3 py-2 rounded-full border flex items-center gap-1.5 ${
               activeType === t ? 'bg-primary text-on-primary border-primary' : 'bg-surface-variant text-on-surface-variant border-outline-variant hover:bg-surface-container-high'
             }`}
           >
-            <span className="material-symbols-outlined text-[18px]">{transportIcons[t]}</span>
+            <span className="material-symbols-outlined text-[16px]">{transportIcons[t]}</span>
             {transportLabels[t]}
           </button>
         ))}
       </section>
 
-      {}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+      {/* Arrivals grid */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {loading && (
-          <div className="col-span-3 text-center text-on-surface-variant font-body-md text-body-md py-8">Загрузка...</div>
+          <div className="col-span-3 text-center text-on-surface-variant py-12 flex flex-col items-center gap-3">
+            <span className="material-symbols-outlined animate-spin text-4xl text-outline">progress_activity</span>
+            <span className="text-sm">Загрузка...</span>
+          </div>
         )}
         {!loading && arrivals.length === 0 && (
-          <div className="col-span-3 bg-surface-container rounded-xl p-md text-on-surface-variant font-body-md text-body-md text-center">
+          <div className="col-span-3 bg-surface-container rounded-2xl p-8 text-on-surface-variant text-sm text-center">
+            <span className="material-symbols-outlined text-5xl block mb-3 text-outline">directions_bus_filled</span>
             Нет ближайших рейсов на этой остановке
           </div>
         )}
         {arrivals.map((arr, i) => (
           <article
             key={i}
-            className={`bg-surface-container p-md rounded-xl border border-outline-variant flex flex-col gap-sm relative overflow-hidden ${arr.minutesUntil <= 2 ? '' : ''}`}
+            className={`card-hover bg-surface-container p-4 rounded-2xl border border-outline-variant flex flex-col gap-3 relative overflow-hidden`}
           >
-            {arr.minutesUntil <= 2 && <div className="absolute top-0 left-0 w-1 h-full bg-primary"></div>}
-            <div className="flex justify-between items-start">
-              <div className="flex items-center gap-sm">
-                <div className={`${pillColors[arr.type] || 'bg-surface-variant text-on-surface'} px-3 py-1 rounded-full font-headline-md text-headline-md flex items-center gap-xs`}>
-                  <span className="material-symbols-outlined text-[20px]">{transportIcons[arr.type] || 'directions_bus'}</span>
+            {arr.minutesUntil <= 2 && <div className="absolute top-0 left-0 w-1 h-full bg-primary rounded-l-2xl"></div>}
+            <div className="flex justify-between items-start gap-2">
+              <div className="flex items-center gap-2.5">
+                <div className={`${pillColors[arr.type] || 'bg-surface-variant text-on-surface'} px-3 py-1.5 rounded-xl font-bold text-sm flex items-center gap-1.5`}>
+                  <span className="material-symbols-outlined text-[18px]">{transportIcons[arr.type] || 'directions_bus'}</span>
                   {arr.routeNumber}
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-label-lg text-label-lg text-on-surface">{arr.routeName}</span>
-                  <span className="font-label-sm text-label-sm text-on-surface-variant">{arr.arrivalTime}</span>
+                <div className="flex flex-col min-w-0">
+                  <span className="font-semibold text-sm text-on-surface truncate">{arr.routeName}</span>
+                  <span className="text-xs text-on-surface-variant">{arr.arrivalTime}</span>
                 </div>
               </div>
             </div>
             <div className="flex justify-between items-end mt-auto">
               <div className="flex flex-col">
-                <span className={`font-headline-lg text-headline-lg ${arr.minutesUntil <= 2 ? 'text-primary' : timeColors[arr.type] || 'text-on-surface'}`}>
+                <span className={`text-2xl font-bold ${arr.minutesUntil <= 2 ? 'text-primary' : timeColors[arr.type] || 'text-on-surface'}`}>
                   {arr.minutesUntil <= 0 ? 'Прибывает' : `${arr.minutesUntil} мин`}
                 </span>
-                <span className="font-label-sm text-label-sm text-on-surface-variant">
+                <span className="text-xs text-on-surface-variant">
                   {arr.minutesUntil <= 0 ? 'Уже здесь' : `в ${arr.arrivalTime}`}
                 </span>
               </div>
-              <button className={`p-2 rounded-full bg-surface-variant hover:bg-surface-bright transition-colors flex items-center justify-center ${arr.minutesUntil <= 2 ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}>
-                <span className="material-symbols-outlined">{arr.minutesUntil <= 2 ? 'notifications' : 'notifications_none'}</span>
+              <button className={`btn-icon p-2 rounded-xl bg-surface-variant hover:bg-surface-bright flex items-center justify-center ${arr.minutesUntil <= 2 ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'}`}>
+                <span className="material-symbols-outlined text-[20px]">{arr.minutesUntil <= 2 ? 'notifications' : 'notifications_none'}</span>
               </button>
             </div>
           </article>

@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Premium Scrollbar */
+.custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #474747; border-radius: 10px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #ffb599; }
+
+/* === HOVER ANIMATIONS === */
+
+/* All buttons base */
+button {
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.18s ease,
+              background-color 0.15s ease,
+              color 0.15s ease,
+              border-color 0.15s ease,
+              opacity 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Lift effect on hover */
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+button:active:not(:disabled) {
+  transform: translateY(0px) scale(0.97);
+}
+
+/* Primary action buttons — orange glow */
+.btn-primary {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.btn-primary:hover:not(:disabled) {
+  box-shadow: 0 0 24px rgba(255, 181, 153, 0.35), 0 4px 16px rgba(0,0,0,0.4);
+  transform: translateY(-2px) scale(1.02);
+}
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.97);
+  box-shadow: 0 0 12px rgba(255, 181, 153, 0.2);
+}
+
+/* Filter chip buttons */
+.btn-chip {
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.btn-chip:hover:not(:disabled) {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.btn-chip:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* Icon-only buttons (circle) */
+.btn-icon {
+  transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.btn-icon:hover:not(:disabled) {
+  transform: scale(1.12) rotate(5deg);
+}
+.btn-icon:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+/* Route / Stop card hover */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* Ripple feedback */
+button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+button:active::after { opacity: 1; }
+
+/* Animations */
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slide-up { from { transform: translateY(12px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes scale-in { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes glow-pulse { 0%, 100% { box-shadow: 0 0 0 rgba(255,181,153,0); } 50% { box-shadow: 0 0 20px rgba(255,181,153,0.2); } }
+
+.animate-fade-in { animation: fade-in 0.4s ease-out; }
+.animate-slide-up { animation: slide-up 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+.animate-scale-in { animation: scale-in 0.25s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* Mobile safe area */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-nav-safe { padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
+}
+
+/* Disable hover lifts on touch to avoid sticky states */
+@media (hover: none) {
+  button:hover:not(:disabled) { transform: none; box-shadow: none; }
+  .card-hover:hover { transform: none; box-shadow: none; }
+}

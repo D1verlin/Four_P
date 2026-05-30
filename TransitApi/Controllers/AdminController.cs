@@ -138,4 +138,19 @@ public class AdminController : ControllerBase
         await _context.SaveChangesAsync();
         return NoContent();
     }
+
+    [HttpPost("import-avto")]
+    [AllowAnonymous]
+    public async Task<IActionResult> ImportAvto()
+    {
+        try
+        {
+            await DataImporter.ImportAvtoData(_context, @"C:\Users\Lenovo\Desktop\Projects\FOUR_P\clean_db.json");
+            return Ok(new { message = "Data imported successfully" });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message, details = ex.ToString() });
+        }
+    }
 }

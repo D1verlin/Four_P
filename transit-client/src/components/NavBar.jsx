@@ -11,11 +11,11 @@ export default function NavBar() {
   const { pathname } = useLocation();
 
   return (
-    <nav className="sticky top-0 z-50 flex justify-between items-center px-6 py-3 w-full bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 font-['Plus_Jakarta_Sans'] antialiased">
-      <div className="flex items-center gap-6">
-        <Link to="/" className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+    <nav className="sticky top-0 z-50 flex justify-between items-center px-4 md:px-6 py-3 w-full bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 font-sans antialiased">
+      <div className="flex items-center gap-4 md:gap-6">
+        <Link to="/" className="text-lg md:text-xl font-bold tracking-tight text-white flex items-center gap-2 shrink-0">
           <span className="material-symbols-outlined text-orange-500" style={{fontVariationSettings:"'FILL' 1"}}>directions_transit</span>
-          UrbanTransit
+          <span className="hidden sm:inline">БрестТранзит</span>
         </Link>
         <div className="hidden md:flex gap-1">
           {navLinks.map(link => {
@@ -24,10 +24,10 @@ export default function NavBar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`flex items-center gap-2 px-3 py-2 rounded-md font-label-lg text-label-lg transition-all active:scale-95 ${
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg active:scale-95 ${
                   isActive
-                    ? 'text-orange-500 font-bold border-b-2 border-orange-500'
-                    : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
+                    ? 'text-orange-400 font-bold border-b-2 border-orange-500 bg-orange-500/10'
+                    : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/80 hover:shadow-zinc-900/50'
                 }`}
               >
                 <span className="material-symbols-outlined text-[18px]">{link.icon}</span>
@@ -37,26 +37,30 @@ export default function NavBar() {
           })}
         </div>
       </div>
-      <div className="flex items-center gap-2">
-        <button className="text-orange-500 hover:bg-zinc-900 rounded-md transition-all active:scale-95 p-2 flex items-center justify-center">
-          <span className="material-symbols-outlined">account_circle</span>
-        </button>
-      </div>
 
-      {}
-      <nav className="bg-zinc-900/95 backdrop-blur-md font-['Plus_Jakarta_Sans'] text-[11px] font-medium fixed bottom-0 w-full z-50 border-t border-zinc-800 shadow-2xl left-0 flex justify-around items-center px-2 py-3 md:hidden">
+      <Link 
+        to="/admin" 
+        className="text-zinc-400 hover:text-orange-400 transition-colors p-2 rounded-full hover:bg-zinc-800 flex items-center justify-center shrink-0"
+        title="Панель управления"
+      >
+        <span className="material-symbols-outlined text-[24px]">manage_accounts</span>
+      </Link>
+
+      {/* Mobile bottom nav */}
+      <nav className="bg-zinc-900/95 backdrop-blur-md font-sans text-[11px] font-medium fixed bottom-0 w-full z-50 border-t border-zinc-800 shadow-2xl left-0 flex justify-around items-center px-1 py-2 md:hidden"
+           style={{ paddingBottom: 'max(12px, env(safe-area-inset-bottom))' }}>
         {navLinks.map(link => {
           const isActive = pathname === link.to || (link.to !== '/' && pathname.startsWith(link.to));
           return (
             <Link
               key={link.to}
               to={link.to}
-              className={`flex flex-col items-center justify-center px-3 py-1 rounded-xl active:scale-90 transition-all ${
-                isActive ? 'text-orange-500 font-bold bg-orange-600/10' : 'text-zinc-500 hover:text-zinc-200'
+              className={`flex flex-col items-center justify-center px-3 py-1.5 rounded-xl active:scale-90 transition-all duration-150 min-w-[56px] ${
+                isActive ? 'text-orange-400 font-bold bg-orange-500/10' : 'text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800/50'
               }`}
             >
-              <span className="material-symbols-outlined" style={isActive ? {fontVariationSettings:"'FILL' 1"} : {}}>{link.icon}</span>
-              <span className="mt-1">{link.label}</span>
+              <span className="material-symbols-outlined text-[22px]" style={isActive ? {fontVariationSettings:"'FILL' 1"} : {}}>{link.icon}</span>
+              <span className="mt-0.5 leading-tight">{link.label}</span>
             </Link>
           );
         })}

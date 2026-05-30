@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace TransitApi.Models;
 
 
@@ -13,6 +15,8 @@ public class RouteStop
     
     public int OffsetMinutes { get; set; }
 
+    [JsonIgnore]
     public TransitRoute Route { get; set; } = null!;
+    [JsonIgnore]
     public Stop Stop { get; set; } = null!;
 }

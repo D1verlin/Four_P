@@ -18,10 +18,10 @@ public class StopsController : ControllerBase
     {
         var query = _db.Stops.AsQueryable();
         if (!string.IsNullOrWhiteSpace(search))
-            query = query.Where(s => s.Name.Contains(search) || s.Address.Contains(search));
+            query = query.Where(s => s.Name.Contains(search));
 
         var stops = await query
-            .Select(s => new { s.Id, s.Name, s.Address, s.Direction })
+            .Select(s => new { s.Id, s.Name })
             .ToListAsync();
         return Ok(stops);
     }

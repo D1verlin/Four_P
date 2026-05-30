@@ -47,10 +47,9 @@ export default function AdminDashboard() {
   };
 
   const fetchStats = async () => {
-    
     setStats({
-      totalRoutes: 7,
-      activeStops: 16,
+      totalRoutes: 28,
+      activeStops: 35,
       pendingNotifications: 4,
       totalUsers: 2
     });
@@ -164,10 +163,10 @@ export default function AdminDashboard() {
       <aside className="w-full md:w-72 bg-surface-container-low border-b md:border-b-0 md:border-r border-outline-variant/30 flex flex-col shadow-2xl z-20">
         <div className="p-lg mb-md flex items-center gap-md">
           <div className="w-12 h-12 bg-primary flex items-center justify-center rounded-xl shadow-lg shadow-primary/20">
-            <span className="material-symbols-outlined text-on-primary text-3xl">route</span>
+            <span className="material-symbols-outlined text-on-primary text-3xl">directions_transit</span>
           </div>
           <div>
-            <h2 className="text-headline-md text-on-surface font-bold tracking-tight">UrbanTransit</h2>
+            <h2 className="text-headline-md text-on-surface font-bold tracking-tight">БрестТранзит</h2>
             <p className="text-label-sm text-primary font-bold uppercase tracking-widest opacity-80">Management</p>
           </div>
         </div>
@@ -207,16 +206,11 @@ export default function AdminDashboard() {
         <header className="sticky top-0 z-10 bg-background/60 backdrop-blur-xl border-b border-outline-variant/20 px-gutter md:px-lg py-md flex items-center justify-between">
           <div>
             <h1 className="text-headline-md text-on-surface capitalize">{TABLES.find(t => t.id === activeTab).name}</h1>
-            <p className="text-label-lg text-on-surface-variant font-medium">UrbanTransit Control • {activeTab.toUpperCase()}</p>
+            <p className="text-label-lg text-on-surface-variant font-medium">БрестТранзит Control • {activeTab.toUpperCase()}</p>
           </div>
-          <div className="flex items-center gap-md">
-            <div className="hidden md:flex flex-col items-end px-md border-r border-outline-variant/30">
-              <p className="text-label-sm text-on-surface-variant font-bold">АДМИНИСТРАТОР</p>
-              <p className="text-label-lg text-on-surface font-bold">admin@urban.local</p>
-            </div>
-            <button className="w-12 h-12 bg-surface-container-highest rounded-full flex items-center justify-center text-on-surface border border-outline-variant/30 hover:border-primary transition-colors">
-              <span className="material-symbols-outlined">account_circle</span>
-            </button>
+          <div className="hidden md:flex flex-col items-end">
+            <p className="text-label-sm text-on-surface-variant font-bold uppercase tracking-widest">Администратор</p>
+            <p className="text-label-lg text-on-surface font-bold">admin@brest-transit.by</p>
           </div>
         </header>
 

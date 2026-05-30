@@ -29,9 +29,8 @@ public class PlannerController : ControllerBase
             .Join(_db.RouteStops.Where(rs => rs.StopId == to),
                   rs1 => rs1.RouteId,
                   rs2 => rs2.RouteId,
-                  (rs1, rs2) => new { FromRS = rs1, ToRS = rs2 })
+                  (rs1, rs2) => new { FromRS = rs1, ToRS = rs2, Route = rs1.Route })
             .Where(x => x.FromRS.Order < x.ToRS.Order)
-            .Include(x => x.FromRS.Route)
             .ToListAsync();
 
         if (!directRoutes.Any())
@@ -49,7 +48,7 @@ public class PlannerController : ControllerBase
 
         foreach (var dr in directRoutes)
         {
-            var route = dr.FromRS.Route;
+            var route = dr.Route;
             var travelMinutes = dr.ToRS.OffsetMinutes - dr.FromRS.OffsetMinutes;
 
             

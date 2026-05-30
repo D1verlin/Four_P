@@ -1,6 +1,5 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import Footer from './components/Footer';
 import RoutePlanner from './pages/RoutePlanner';
 import Favorites from './pages/Favorites';
 import StopDetail from './pages/StopDetail';
@@ -8,6 +7,7 @@ import Schedules from './pages/Schedules';
 import Notifications from './pages/Notifications';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import { ToastProvider } from './components/ToastContext';
 
 function AppContent() {
   const location = useLocation();
@@ -22,18 +22,20 @@ function AppContent() {
         <Route path="/stops/:id" element={<StopDetail />} />
         <Route path="/schedules" element={<Schedules />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/admin" element={<Navigate to="/admin/login" />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
-      {!isAdminPage && <Footer />}
     </div>
   );
 }
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    <ToastProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </ToastProvider>
   );
 }

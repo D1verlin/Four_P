@@ -57,3 +57,5 @@ Thumbs.db
 # if it is tracked as the default seeded SQLite database for this project.
 # To completely ignore transit.db, uncomment the line below:
 # **/transit.db
+
+.antigravitycli/

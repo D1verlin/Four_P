@@ -1,0 +1,1297 @@
+[
+  {
+    "Number": "9",
+    "Name": "М.р-н Южный - Мясокомбинат",
+    "Type": "Bus",
+    "Day": "Рабочие дни",
+    "Stops": [
+      {
+        "Name": "Д.П. \"Южный городок\"",
+        "OffsetMinutes": 0,
+        "Order": 1
+      },
+      {
+        "Name": "М.р-н Южный",
+        "OffsetMinutes": 1,
+        "Order": 2
+      },
+      {
+        "Name": "Санта-54",
+        "OffsetMinutes": 3,
+        "Order": 3
+      },
+      {
+        "Name": "4-й Форт",
+        "OffsetMinutes": 5,
+        "Order": 4
+      },
+      {
+        "Name": "Кольцевая",
+        "OffsetMinutes": 6,
+        "Order": 5
+      },
+      {
+        "Name": "Подгородская",
+        "OffsetMinutes": 7,
+        "Order": 6
+      },
+      {
+        "Name": "Колесника",
+        "OffsetMinutes": 9,
+        "Order": 7
+      },
+      {
+        "Name": "Санта-53",
+        "OffsetMinutes": 10,
+        "Order": 8
+      },
+      {
+        "Name": "Махновича",
+        "OffsetMinutes": 12,
+        "Order": 9
+      },
+      {
+        "Name": "Гостиница Беларусь",
+        "OffsetMinutes": 16,
+        "Order": 10
+      },
+      {
+        "Name": "Проспект Машерова",
+        "OffsetMinutes": 18,
+        "Order": 11
+      },
+      {
+        "Name": "ЦУМ",
+        "OffsetMinutes": 20,
+        "Order": 12
+      },
+      {
+        "Name": "Ленина",
+        "OffsetMinutes": 22,
+        "Order": 13
+      },
+      {
+        "Name": "Сквер Иконникова",
+        "OffsetMinutes": 24,
+        "Order": 14
+      },
+      {
+        "Name": "Площадь Ленина",
+        "OffsetMinutes": 26,
+        "Order": 15
+      },
+      {
+        "Name": "Парк 1 МАЯ",
+        "OffsetMinutes": 28,
+        "Order": 16
+      },
+      {
+        "Name": "Мостовая",
+        "OffsetMinutes": 31,
+        "Order": 17
+      },
+      {
+        "Name": "Матросова",
+        "OffsetMinutes": 33,
+        "Order": 18
+      },
+      {
+        "Name": "Летная",
+        "OffsetMinutes": 35,
+        "Order": 19
+      },
+      {
+        "Name": "Лейтенанта Акимочкина",
+        "OffsetMinutes": 36,
+        "Order": 20
+      },
+      {
+        "Name": "Речицкая",
+        "OffsetMinutes": 38,
+        "Order": 21
+      },
+      {
+        "Name": "Хлебпром",
+        "OffsetMinutes": 40,
+        "Order": 22
+      },
+      {
+        "Name": "Школа",
+        "OffsetMinutes": 42,
+        "Order": 23
+      },
+      {
+        "Name": "Агротранс",
+        "OffsetMinutes": 43,
+        "Order": 24
+      },
+      {
+        "Name": "база «Рыбторг»",
+        "OffsetMinutes": 45,
+        "Order": 25
+      },
+      {
+        "Name": "Мясокомбинат",
+        "OffsetMinutes": 47,
+        "Order": 26
+      }
+    ],
+    "Schedules": [
+      "05:26:00",
+      "05:58:00",
+      "06:31:00",
+      "06:57:00",
+      "07:14:00",
+      "07:38:00",
+      "07:57:00",
+      "08:14:00",
+      "08:46:00",
+      "09:18:00",
+      "09:46:00",
+      "10:06:00",
+      "10:43:00",
+      "11:10:00",
+      "11:46:00",
+      "12:25:00",
+      "13:00:00",
+      "13:29:00",
+      "13:50:00",
+      "14:27:00",
+      "14:54:00",
+      "15:12:00",
+      "15:33:00",
+      "15:54:00",
+      "16:14:00",
+      "16:35:00",
+      "16:55:00",
+      "17:07:00",
+      "17:22:00",
+      "17:41:00",
+      "18:09:00",
+      "18:25:00",
+      "18:52:00",
+      "19:20:00",
+      "20:20:00",
+      "21:04:00",
+      "21:32:00",
+      "22:06:00",
+      "22:40:00",
+      "23:06:00"
+    ]
+  },
+  {
+    "Number": "9",
+    "Name": "Мясокомбинат - М.р-н Южный",
+    "Type": "Bus",
+    "Day": "Рабочие дни",
+    "Stops": [
+      {
+        "Name": "Мясокомбинат",
+        "OffsetMinutes": 0,
+        "Order": 1
+      },
+      {
+        "Name": "база «Рыбторг»",
+        "OffsetMinutes": 2,
+        "Order": 2
+      },
+      {
+        "Name": "Агротранс",
+        "OffsetMinutes": 4,
+        "Order": 3
+      },
+      {
+        "Name": "Школа",
+        "OffsetMinutes": 6,
+        "Order": 4
+      },
+      {
+        "Name": "Хлебпром",
+        "OffsetMinutes": 8,
+        "Order": 5
+      },
+      {
+        "Name": "Речицкая",
+        "OffsetMinutes": 9,
+        "Order": 6
+      },
+      {
+        "Name": "Лейтенанта Акимочкина",
+        "OffsetMinutes": 11,
+        "Order": 7
+      },
+      {
+        "Name": "Летная",
+        "OffsetMinutes": 12,
+        "Order": 8
+      },
+      {
+        "Name": "Брестских дивизий",
+        "OffsetMinutes": 15,
+        "Order": 9
+      },
+      {
+        "Name": "Мостовая",
+        "OffsetMinutes": 17,
+        "Order": 10
+      },
+      {
+        "Name": "Парк 1 МАЯ",
+        "OffsetMinutes": 20,
+        "Order": 11
+      },
+      {
+        "Name": "Театр",
+        "OffsetMinutes": 22,
+        "Order": 12
+      },
+      {
+        "Name": "Музей спасенн.ценностей",
+        "OffsetMinutes": 24,
+        "Order": 13
+      },
+      {
+        "Name": "Интурист",
+        "OffsetMinutes": 26,
+        "Order": 14
+      },
+      {
+        "Name": "Белтелеком",
+        "OffsetMinutes": 28,
+        "Order": 15
+      },
+      {
+        "Name": "Б.Шевченко",
+        "OffsetMinutes": 31,
+        "Order": 16
+      },
+      {
+        "Name": "Варшавское шоссе",
+        "OffsetMinutes": 34,
+        "Order": 17
+      },
+      {
+        "Name": "Махновича",
+        "OffsetMinutes": 36,
+        "Order": 18
+      },
+      {
+        "Name": "Санта-53",
+        "OffsetMinutes": 37,
+        "Order": 19
+      },
+      {
+        "Name": "Колесника",
+        "OffsetMinutes": 39,
+        "Order": 20
+      },
+      {
+        "Name": "Кольцевая",
+        "OffsetMinutes": 41,
+        "Order": 21
+      },
+      {
+        "Name": "4-й Форт",
+        "OffsetMinutes": 43,
+        "Order": 22
+      },
+      {
+        "Name": "Д.П. \"Южный городок\"",
+        "OffsetMinutes": 46,
+        "Order": 23
+      }
+    ],
+    "Schedules": [
+      "05:43:00",
+      "06:16:00",
+      "06:47:00",
+      "07:04:00",
+      "07:20:00",
+      "07:49:00",
+      "08:12:00",
+      "08:36:00",
+      "08:54:00",
+      "09:09:00",
+      "09:38:00",
+      "10:08:00",
+      "10:36:00",
+      "10:55:00",
+      "11:33:00",
+      "12:00:00",
+      "12:36:00",
+      "13:14:00",
+      "13:50:00",
+      "14:18:00",
+      "14:40:00",
+      "15:17:00",
+      "15:44:00",
+      "16:02:00",
+      "16:23:00",
+      "16:43:00",
+      "17:05:00",
+      "17:24:00",
+      "17:45:00",
+      "18:00:00",
+      "18:15:00",
+      "18:33:00",
+      "19:00:00",
+      "19:17:00",
+      "19:42:00",
+      "20:13:00",
+      "21:10:00",
+      "21:52:00",
+      "22:20:00",
+      "22:53:00",
+      "23:25:00",
+      "23:51:00"
+    ]
+  },
+  {
+    "Number": "37",
+    "Name": "ЦГБ - Брестское пиво",
+    "Type": "Bus",
+    "Day": "Рабочие дни",
+    "Stops": [
+      {
+        "Name": "ЦГБ",
+        "OffsetMinutes": 0,
+        "Order": 1
+      },
+      {
+        "Name": "Стафеева",
+        "OffsetMinutes": 2,
+        "Order": 2
+      },
+      {
+        "Name": "Дом ветеранов",
+        "OffsetMinutes": 4,
+        "Order": 3
+      },
+      {
+        "Name": "Лицей",
+        "OffsetMinutes": 6,
+        "Order": 4
+      },
+      {
+        "Name": "Восточная",
+        "OffsetMinutes": 8,
+        "Order": 5
+      },
+      {
+        "Name": "Школьная",
+        "OffsetMinutes": 10,
+        "Order": 6
+      },
+      {
+        "Name": "Орловская",
+        "OffsetMinutes": 12,
+        "Order": 7
+      },
+      {
+        "Name": "Молодёжная",
+        "OffsetMinutes": 15,
+        "Order": 8
+      },
+      {
+        "Name": "Поликлиника",
+        "OffsetMinutes": 18,
+        "Order": 9
+      },
+      {
+        "Name": "Богданчука",
+        "OffsetMinutes": 21,
+        "Order": 10
+      },
+      {
+        "Name": "Завод",
+        "OffsetMinutes": 23,
+        "Order": 11
+      },
+      {
+        "Name": "ЦМТ",
+        "OffsetMinutes": 25,
+        "Order": 12
+      },
+      {
+        "Name": "Зеленая",
+        "OffsetMinutes": 27,
+        "Order": 13
+      },
+      {
+        "Name": "МОПРа",
+        "OffsetMinutes": 30,
+        "Order": 14
+      },
+      {
+        "Name": "Б.Космонавтов",
+        "OffsetMinutes": 33,
+        "Order": 15
+      },
+      {
+        "Name": "Гоголя",
+        "OffsetMinutes": 35,
+        "Order": 16
+      },
+      {
+        "Name": "Университет",
+        "OffsetMinutes": 37,
+        "Order": 17
+      },
+      {
+        "Name": "Центральный рынок",
+        "OffsetMinutes": 39,
+        "Order": 18
+      },
+      {
+        "Name": "Парк 1 МАЯ",
+        "OffsetMinutes": 42,
+        "Order": 19
+      },
+      {
+        "Name": "Мостовая",
+        "OffsetMinutes": 45,
+        "Order": 20
+      },
+      {
+        "Name": "Матросова",
+        "OffsetMinutes": 48,
+        "Order": 21
+      },
+      {
+        "Name": "Летная",
+        "OffsetMinutes": 51,
+        "Order": 22
+      },
+      {
+        "Name": "Лейтенанта Акимочкина",
+        "OffsetMinutes": 53,
+        "Order": 23
+      },
+      {
+        "Name": "Почта",
+        "OffsetMinutes": 55,
+        "Order": 24
+      },
+      {
+        "Name": "Адамковская",
+        "OffsetMinutes": 57,
+        "Order": 25
+      },
+      {
+        "Name": "Училище олимпийского резерва",
+        "OffsetMinutes": 58,
+        "Order": 26
+      },
+      {
+        "Name": "Агротранс",
+        "OffsetMinutes": 60,
+        "Order": 27
+      },
+      {
+        "Name": "Школа",
+        "OffsetMinutes": 61,
+        "Order": 28
+      },
+      {
+        "Name": "Хлебпром",
+        "OffsetMinutes": 63,
+        "Order": 29
+      },
+      {
+        "Name": "Бауманская",
+        "OffsetMinutes": 64,
+        "Order": 30
+      },
+      {
+        "Name": "ОАО Брестское пиво",
+        "OffsetMinutes": 65,
+        "Order": 31
+      }
+    ],
+    "Schedules": [
+      "06:31:00",
+      "06:53:00",
+      "07:19:00",
+      "07:54:00",
+      "08:30:00",
+      "09:02:00",
+      "09:38:00",
+      "10:06:00",
+      "10:32:00",
+      "11:04:00",
+      "11:48:00",
+      "12:27:00",
+      "14:08:00",
+      "14:37:00",
+      "15:07:00",
+      "15:38:00",
+      "16:09:00",
+      "16:43:00",
+      "17:43:00",
+      "19:00:00",
+      "19:52:00",
+      "20:30:00",
+      "21:48:00",
+      "22:30:00"
+    ]
+  },
+  {
+    "Number": "37",
+    "Name": "Брестское пиво - ЦГБ",
+    "Type": "Bus",
+    "Day": "Рабочие дни",
+    "Stops": [
+      {
+        "Name": "ОАО Брестское пиво",
+        "OffsetMinutes": 0,
+        "Order": 1
+      },
+      {
+        "Name": "Бауманская",
+        "OffsetMinutes": 1,
+        "Order": 2
+      },
+      {
+        "Name": "Хлебпром",
+        "OffsetMinutes": 3,
+        "Order": 3
+      },
+      {
+        "Name": "Школа",
+        "OffsetMinutes": 5,
+        "Order": 4
+      },
+      {
+        "Name": "Училище олимпийского резерва",
+        "OffsetMinutes": 7,
+        "Order": 5
+      },
+      {
+        "Name": "Адамковская",
+        "OffsetMinutes": 9,
+        "Order": 6
+      },
+      {
+        "Name": "Почта",
+        "OffsetMinutes": 11,
+        "Order": 7
+      },
+      {
+        "Name": "Лейтенанта Акимочкина",
+        "OffsetMinutes": 13,
+        "Order": 8
+      },
+      {
+        "Name": "Летная",
+        "OffsetMinutes": 16,
+        "Order": 9
+      },
+      {
+        "Name": "Брестских дивизий",
+        "OffsetMinutes": 19,
+        "Order": 10
+      },
+      {
+        "Name": "Мостовая",
+        "OffsetMinutes": 21,
+        "Order": 11
+      },
+      {
+        "Name": "Мицкевича",
+        "OffsetMinutes": 25,
+        "Order": 12
+      },
+      {
+        "Name": "Советская",
+        "OffsetMinutes": 27,
+        "Order": 13
+      },
+      {
+        "Name": "Газоаппарат",
+        "OffsetMinutes": 30,
+        "Order": 14
+      },
+      {
+        "Name": "Университет",
+        "OffsetMinutes": 32,
+        "Order": 15
+      },
+      {
+        "Name": "Гоголя",
+        "OffsetMinutes": 34,
+        "Order": 16
+      },
+      {
+        "Name": "Б.Космонавтов",
+        "OffsetMinutes": 36,
+        "Order": 17
+      },
+      {
+        "Name": "МОПРа",
+        "OffsetMinutes": 39,
+        "Order": 18
+      },
+      {
+        "Name": "Зеленая",
+        "OffsetMinutes": 42,
+        "Order": 19
+      },
+      {
+        "Name": "ЦМТ",
+        "OffsetMinutes": 44,
+        "Order": 20
+      },
+      {
+        "Name": "Завод",
+        "OffsetMinutes": 46,
+        "Order": 21
+      },
+      {
+        "Name": "Богданчука",
+        "OffsetMinutes": 48,
+        "Order": 22
+      },
+      {
+        "Name": "Поликлиника",
+        "OffsetMinutes": 50,
+        "Order": 23
+      },
+      {
+        "Name": "Молодёжная",
+        "OffsetMinutes": 52,
+        "Order": 24
+      },
+      {
+        "Name": "Орловская",
+        "OffsetMinutes": 55,
+        "Order": 25
+      },
+      {
+        "Name": "Школьная",
+        "OffsetMinutes": 57,
+        "Order": 26
+      },
+      {
+        "Name": "Восточная",
+        "OffsetMinutes": 59,
+        "Order": 27
+      },
+      {
+        "Name": "Лицей",
+        "OffsetMinutes": 61,
+        "Order": 28
+      },
+      {
+        "Name": "Дом ветеранов",
+        "OffsetMinutes": 62,
+        "Order": 29
+      },
+      {
+        "Name": "Стафеева",
+        "OffsetMinutes": 64,
+        "Order": 30
+      },
+      {
+        "Name": "ЦГБ",
+        "OffsetMinutes": 66,
+        "Order": 31
+      }
+    ],
+    "Schedules": [
+      "06:01:00",
+      "07:35:00",
+      "08:05:00",
+      "08:34:00",
+      "09:06:00",
+      "09:40:00",
+      "10:12:00",
+      "10:48:00",
+      "11:16:00",
+      "11:42:00",
+      "12:15:00",
+      "12:58:00",
+      "13:37:00",
+      "15:18:00",
+      "15:47:00",
+      "16:17:00",
+      "16:48:00",
+      "17:19:00",
+      "17:54:00",
+      "18:53:00",
+      "20:10:00",
+      "21:03:00",
+      "21:40:00",
+      "22:58:00"
+    ]
+  },
+  {
+    "Number": "100",
+    "Name": "Заречный - Облбольница",
+    "Type": "Trolleybus",
+    "Day": "Все дни",
+    "Stops": [
+      {
+        "Name": "Заречный",
+        "OffsetMinutes": 0,
+        "Order": 1
+      },
+      {
+        "Name": "Новая",
+        "OffsetMinutes": 1,
+        "Order": 2
+      },
+      {
+        "Name": "Грибоедова",
+        "OffsetMinutes": 2,
+        "Order": 3
+      },
+      {
+        "Name": "Луговая",
+        "OffsetMinutes": 4,
+        "Order": 4
+      },
+      {
+        "Name": "Береговая",
+        "OffsetMinutes": 5,
+        "Order": 5
+      },
+      {
+        "Name": "Соя",
+        "OffsetMinutes": 7,
+        "Order": 6
+      },
+      {
+        "Name": "Крепость",
+        "OffsetMinutes": 10,
+        "Order": 7
+      },
+      {
+        "Name": "БТИ",
+        "OffsetMinutes": 12,
+        "Order": 8
+      },
+      {
+        "Name": "стад. \"Брестский\"",
+        "OffsetMinutes": 14,
+        "Order": 9
+      },
+      {
+        "Name": "Театр",
+        "OffsetMinutes": 16,
+        "Order": 10
+      },
+      {
+        "Name": "Музей спас.ценн.",
+        "OffsetMinutes": 17,
+        "Order": 11
+      },
+      {
+        "Name": "\"Интурист\"",
+        "OffsetMinutes": 18,
+        "Order": 12
+      },
+      {
+        "Name": "Белтелеком",
+        "OffsetMinutes": 21,
+        "Order": 13
+      },
+      {
+        "Name": "Машерова",
+        "OffsetMinutes": 23,
+        "Order": 14
+      },
+      {
+        "Name": "МОПРа",
+        "OffsetMinutes": 25,
+        "Order": 15
+      },
+      {
+        "Name": "Зеленая",
+        "OffsetMinutes": 28,
+        "Order": 16
+      },
+      {
+        "Name": "ЦМТ",
+        "OffsetMinutes": 30,
+        "Order": 17
+      },
+      {
+        "Name": "Завод",
+        "OffsetMinutes": 33,
+        "Order": 18
+      },
+      {
+        "Name": "Богданчука",
+        "OffsetMinutes": 35,
+        "Order": 19
+      },
+      {
+        "Name": "Техуниверситет",
+        "OffsetMinutes": 37,
+        "Order": 20
+      },
+      {
+        "Name": "Парк Воинов",
+        "OffsetMinutes": 40,
+        "Order": 21
+      },
+      {
+        "Name": "Восточный м/р",
+        "OffsetMinutes": 42,
+        "Order": 22
+      },
+      {
+        "Name": "Тельм. лес",
+        "OffsetMinutes": 45,
+        "Order": 23
+      },
+      {
+        "Name": "Облбольница",
+        "OffsetMinutes": 48,
+        "Order": 24
+      }
+    ],
+    "Schedules": [
+      "06:34:00",
+      "06:51:00",
+      "07:18:00",
+      "07:37:00",
+      "07:54:00",
+      "08:20:00",
+      "08:39:00",
+      "09:07:00",
+      "09:25:00",
+      "09:40:00",
+      "10:06:00",
+      "11:12:00",
+      "11:33:00",
+      "12:05:00",
+      "12:30:00",
+      "12:52:00",
+      "13:03:00",
+      "13:20:00",
+      "13:50:00",
+      "14:14:00",
+      "14:37:00",
+      "14:50:00",
+      "15:05:00",
+      "15:38:00",
+      "15:59:00",
+      "16:23:00",
+      "16:35:00",
+      "16:50:00",
+      "17:27:00",
+      "17:43:00",
+      "18:11:00",
+      "18:23:00",
+      "18:36:00",
+      "19:19:00",
+      "20:03:00",
+      "20:27:00",
+      "20:57:00",
+      "21:24:00",
+      "21:49:00",
+      "22:12:00",
+      "22:42:00",
+      "23:08:00",
+      "23:35:00",
+      "23:52:00"
+    ]
+  },
+  {
+    "Number": "100",
+    "Name": "Облбольница - Заречный",
+    "Type": "Trolleybus",
+    "Day": "Все дни",
+    "Stops": [
+      {
+        "Name": "Облбольница",
+        "OffsetMinutes": 0,
+        "Order": 1
+      },
+      {
+        "Name": "Тельм. лес",
+        "OffsetMinutes": 3,
+        "Order": 2
+      },
+      {
+        "Name": "Восточный м/р",
+        "OffsetMinutes": 5,
+        "Order": 3
+      },
+      {
+        "Name": "Дет. городок",
+        "OffsetMinutes": 7,
+        "Order": 4
+      },
+      {
+        "Name": "Парк Воинов",
+        "OffsetMinutes": 9,
+        "Order": 5
+      },
+      {
+        "Name": "Техуниверситет",
+        "OffsetMinutes": 12,
+        "Order": 6
+      },
+      {
+        "Name": "Богданчука",
+        "OffsetMinutes": 14,
+        "Order": 7
+      },
+      {
+        "Name": "Завод",
+        "OffsetMinutes": 16,
+        "Order": 8
+      },
+      {
+        "Name": "ЦМТ",
+        "OffsetMinutes": 19,
+        "Order": 9
+      },
+      {
+        "Name": "Зеленая",
+        "OffsetMinutes": 21,
+        "Order": 10
+      },
+      {
+        "Name": "МОПРа",
+        "OffsetMinutes": 24,
+        "Order": 11
+      },
+      {
+        "Name": "Машерова",
+        "OffsetMinutes": 26,
+        "Order": 12
+      },
+      {
+        "Name": "ЦУМ",
+        "OffsetMinutes": 28,
+        "Order": 13
+      },
+      {
+        "Name": "Ленина",
+        "OffsetMinutes": 30,
+        "Order": 14
+      },
+      {
+        "Name": "скв. Иконникова",
+        "OffsetMinutes": 31,
+        "Order": 15
+      },
+      {
+        "Name": "стад. \"Брестский\"",
+        "OffsetMinutes": 33,
+        "Order": 16
+      },
+      {
+        "Name": "БТИ",
+        "OffsetMinutes": 36,
+        "Order": 17
+      },
+      {
+        "Name": "Крепость",
+        "OffsetMinutes": 37,
+        "Order": 18
+      },
+      {
+        "Name": "Соя",
+        "OffsetMinutes": 40,
+        "Order": 19
+      },
+      {
+        "Name": "Береговая",
+        "OffsetMinutes": 42,
+        "Order": 20
+      },
+      {
+        "Name": "Луговая",
+        "OffsetMinutes": 43,
+        "Order": 21
+      },
+      {
+        "Name": "Варшав. шоссе",
+        "OffsetMinutes": 45,
+        "Order": 22
+      },
+      {
+        "Name": "Махновича",
+        "OffsetMinutes": 46,
+        "Order": 23
+      },
+      {
+        "Name": "Грюнвальдская",
+        "OffsetMinutes": 47,
+        "Order": 24
+      },
+      {
+        "Name": "Благовещенского",
+        "OffsetMinutes": 49,
+        "Order": 25
+      },
+      {
+        "Name": "Заречный",
+        "OffsetMinutes": 50,
+        "Order": 26
+      }
+    ],
+    "Schedules": [
+      "00:25:00",
+      "05:58:00",
+      "06:25:00",
+      "07:01:00",
+      "07:26:00",
+      "07:45:00",
+      "08:13:00",
+      "08:31:00",
+      "08:46:00",
+      "09:10:00",
+      "10:20:00",
+      "10:38:00",
+      "11:13:00",
+      "11:36:00",
+      "11:53:00",
+      "12:10:00",
+      "12:28:00",
+      "12:58:00",
+      "13:22:00",
+      "13:45:00",
+      "13:56:00",
+      "14:13:00",
+      "14:43:00",
+      "15:07:00",
+      "15:30:00",
+      "15:43:00",
+      "15:58:00",
+      "16:32:00",
+      "16:50:00",
+      "17:17:00",
+      "17:29:00",
+      "17:42:00",
+      "18:25:00",
+      "19:11:00",
+      "19:35:00",
+      "20:05:00",
+      "20:32:00",
+      "20:53:00",
+      "20:55:00",
+      "21:20:00",
+      "21:50:00",
+      "22:16:00",
+      "22:42:00",
+      "23:05:00",
+      "23:31:00",
+      "23:57:00"
+    ]
+  },
+  {
+    "Number": "102",
+    "Name": "ДП Виктория - Свердлова",
+    "Type": "Trolleybus",
+    "Day": "Все дни",
+    "Stops": [
+      {
+        "Name": "ДП \"Виктория\"",
+        "OffsetMinutes": 0,
+        "Order": 1
+      },
+      {
+        "Name": "\"Виктория\"",
+        "OffsetMinutes": 2,
+        "Order": 2
+      },
+      {
+        "Name": "Гаврилова",
+        "OffsetMinutes": 4,
+        "Order": 3
+      },
+      {
+        "Name": "ФОК",
+        "OffsetMinutes": 5,
+        "Order": 4
+      },
+      {
+        "Name": "Дет. городок",
+        "OffsetMinutes": 7,
+        "Order": 5
+      },
+      {
+        "Name": "Парк Воинов",
+        "OffsetMinutes": 9,
+        "Order": 6
+      },
+      {
+        "Name": "Техуниверситет",
+        "OffsetMinutes": 12,
+        "Order": 7
+      },
+      {
+        "Name": "Богданчука",
+        "OffsetMinutes": 14,
+        "Order": 8
+      },
+      {
+        "Name": "Завод",
+        "OffsetMinutes": 16,
+        "Order": 9
+      },
+      {
+        "Name": "ЦМТ",
+        "OffsetMinutes": 19,
+        "Order": 10
+      },
+      {
+        "Name": "Зеленая",
+        "OffsetMinutes": 21,
+        "Order": 11
+      },
+      {
+        "Name": "МОПРа",
+        "OffsetMinutes": 24,
+        "Order": 12
+      },
+      {
+        "Name": "пр. Машерова",
+        "OffsetMinutes": 26,
+        "Order": 13
+      },
+      {
+        "Name": "ЦУМ",
+        "OffsetMinutes": 28,
+        "Order": 14
+      },
+      {
+        "Name": "Свердлова",
+        "OffsetMinutes": 30,
+        "Order": 15
+      }
+    ],
+    "Schedules": [
+      "06:01:00",
+      "07:04:00",
+      "07:28:00",
+      "08:08:00",
+      "08:38:00",
+      "09:45:00",
+      "10:05:00",
+      "11:11:00",
+      "11:33:00",
+      "12:17:00",
+      "12:39:00",
+      "13:23:00",
+      "13:45:00",
+      "14:32:00",
+      "14:52:00",
+      "15:38:00",
+      "15:58:00",
+      "16:44:00",
+      "17:05:00",
+      "17:50:00",
+      "18:11:00",
+      "19:17:00",
+      "19:40:00",
+      "20:44:00",
+      "21:50:00"
+    ]
+  },
+  {
+    "Number": "102",
+    "Name": "Свердлова - ДП Виктория",
+    "Type": "Trolleybus",
+    "Day": "Все дни",
+    "Stops": [
+      {
+        "Name": "Свердлова",
+        "OffsetMinutes": 0,
+        "Order": 1
+      },
+      {
+        "Name": "\"Белтелеком\"",
+        "OffsetMinutes": 2,
+        "Order": 2
+      },
+      {
+        "Name": "пр. Машерова",
+        "OffsetMinutes": 4,
+        "Order": 3
+      },
+      {
+        "Name": "МОПРа",
+        "OffsetMinutes": 6,
+        "Order": 4
+      },
+      {
+        "Name": "Зеленая",
+        "OffsetMinutes": 9,
+        "Order": 5
+      },
+      {
+        "Name": "ЦМТ",
+        "OffsetMinutes": 11,
+        "Order": 6
+      },
+      {
+        "Name": "Завод",
+        "OffsetMinutes": 14,
+        "Order": 7
+      },
+      {
+        "Name": "Богданчука",
+        "OffsetMinutes": 16,
+        "Order": 8
+      },
+      {
+        "Name": "Техуниверситет",
+        "OffsetMinutes": 18,
+        "Order": 9
+      },
+      {
+        "Name": "Парк Воинов",
+        "OffsetMinutes": 21,
+        "Order": 10
+      },
+      {
+        "Name": "ФОК",
+        "OffsetMinutes": 24,
+        "Order": 11
+      },
+      {
+        "Name": "Гаврилова",
+        "OffsetMinutes": 26,
+        "Order": 12
+      },
+      {
+        "Name": "ДП \"Виктория\"",
+        "OffsetMinutes": 29,
+        "Order": 13
+      }
+    ],
+    "Schedules": [
+      "06:32:00",
+      "07:35:00",
+      "08:05:00",
+      "08:40:00",
+      "09:13:00",
+      "10:17:00",
+      "10:38:00",
+      "11:44:00",
+      "12:06:00",
+      "12:50:00",
+      "13:12:00",
+      "13:58:00",
+      "14:18:00",
+      "15:05:00",
+      "15:25:00",
+      "16:11:00",
+      "16:30:00",
+      "17:17:00",
+      "17:38:00",
+      "18:23:00",
+      "18:43:00",
+      "19:49:00",
+      "20:12:00",
+      "21:16:00",
+      "22:27:00"
+    ]
+  }
+]

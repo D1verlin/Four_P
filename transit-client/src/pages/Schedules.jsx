@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { routesApi, schedulesApi } from '../api';
+import { useToast } from '../components/ToastContext';
 
 const transportIcons = { Bus: 'directions_bus', Trolleybus: 'commute', Tram: 'tram', Minibus: 'airport_shuttle' };
 const transportLabels = { Bus: 'Автобус', Trolleybus: 'Троллейбус', Tram: 'Трамвай', Minibus: 'Маршрутка' };
@@ -15,11 +16,11 @@ export default function Schedules() {
   const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   useEffect(() => {
     routesApi.getAll().then(r => {
       setRoutes(r.data);
-      
       const paramRouteId = searchParams.get('routeId');
       if (paramRouteId) {
         const found = r.data.find(rt => rt.id === parseInt(paramRouteId));
@@ -50,137 +51,139 @@ export default function Schedules() {
   const filteredRoutes = typeFilter ? routes.filter(r => r.type === typeFilter) : routes;
 
   const periods = [
-    { id: 'now', label: 'Сейчас' },
-    { id: 'morning', label: 'Утро (06:00 - 12:00)' },
-    { id: 'afternoon', label: 'День (12:00 - 18:00)' },
-    { id: 'evening', label: 'Вечер (18:00 - 24:00)' },
+    { id: 'now',       label: 'Сейчас' },
+    { id: 'morning',   label: 'Утро 06–12' },
+    { id: 'afternoon', label: 'День 12–18' },
+    { id: 'evening',   label: 'Вечер 18–24' },
   ];
 
   const addToFavorites = (routeId) => {
     const saved = JSON.parse(localStorage.getItem('favRoutes') || '[]');
     if (!saved.includes(routeId)) {
       localStorage.setItem('favRoutes', JSON.stringify([...saved, routeId]));
+      showToast('Маршрут добавлен в избранное!', 'success');
+    } else {
+      showToast('Маршрут уже в избранном!', 'info');
     }
   };
 
   return (
-    <main className="flex-grow flex flex-col md:flex-row gap-md p-margin-mobile md:p-margin-desktop max-w-[1280px] mx-auto w-full pb-[100px] md:pb-md">
-      {}
-      <aside className="w-full md:w-1/3 lg:w-1/4 flex flex-col gap-md shrink-0">
-        {}
-        <div className="bg-surface-container rounded-xl p-sm grid grid-cols-2 gap-base border border-outline-variant/30">
+    <main className="flex-grow flex flex-col md:flex-row gap-4 px-4 md:px-8 py-4 md:py-6 max-w-[1280px] mx-auto w-full pb-[80px] md:pb-6">
+      {/* === SIDEBAR === */}
+      <aside className="w-full md:w-72 lg:w-64 flex flex-col gap-3 shrink-0">
+        {/* Transport type filter grid */}
+        <div className="bg-surface-container rounded-2xl p-3 grid grid-cols-5 md:grid-cols-3 gap-2 border border-outline-variant/30">
           {[null, ...typeFilters].map((t, i) => (
             <button
               key={i}
               id={t ? `type-${t.toLowerCase()}` : 'type-all'}
               onClick={() => setTypeFilter(t)}
-              className={`rounded-lg p-sm flex flex-col items-center justify-center gap-2 transition-colors ${
+              className={`btn-chip rounded-xl p-2 flex flex-col items-center justify-center gap-1 ${
                 typeFilter === t
-                  ? 'bg-primary/10 border border-primary/20 hover:bg-primary/20'
+                  ? 'bg-primary/15 border border-primary/30'
                   : 'bg-surface-variant hover:bg-surface-container-high'
               }`}
             >
-              <span className={`material-symbols-outlined text-3xl ${typeFilter === t ? 'text-primary' : 'text-on-surface-variant'}`} style={typeFilter === t ? {fontVariationSettings:"'FILL' 1"} : {}}>
+              <span className={`material-symbols-outlined text-2xl ${typeFilter === t ? 'text-primary' : 'text-on-surface-variant'}`}
+                style={typeFilter === t ? {fontVariationSettings:"'FILL' 1"} : {}}>
                 {t ? transportIcons[t] : 'directions_transit'}
               </span>
-              <span className={`font-label-sm text-label-sm ${typeFilter === t ? 'text-on-surface' : 'text-on-surface-variant'}`}>
+              <span className={`text-[10px] font-semibold leading-tight text-center ${typeFilter === t ? 'text-on-surface' : 'text-on-surface-variant'}`}>
                 {t ? transportLabels[t] : 'Все'}
               </span>
             </button>
           ))}
         </div>
 
-        {}
-        <div className="bg-surface-container rounded-xl p-md border border-outline-variant/30 flex flex-col gap-sm flex-grow">
-          <h3 className="font-headline-md text-headline-md text-on-surface mb-2">Маршруты</h3>
-          <div className="flex flex-col gap-2">
+        {/* Routes list */}
+        <div className="bg-surface-container rounded-2xl p-3 border border-outline-variant/30 flex flex-col gap-2 md:flex-grow">
+          <h3 className="text-base font-bold text-on-surface px-1">Маршруты</h3>
+          <div className="flex flex-col gap-1.5 max-h-60 md:max-h-none overflow-y-auto custom-scrollbar">
             {filteredRoutes.map(route => (
               <button
                 key={route.id}
                 id={`route-${route.id}`}
                 onClick={() => loadSchedule(route)}
-                className={`flex items-center justify-between p-sm rounded-lg border transition-colors text-left group ${
+                className={`flex items-center justify-between p-2.5 rounded-xl border transition-all text-left group ${
                   selectedRoute?.id === route.id
-                    ? 'bg-surface-container-high border-primary/30 hover:border-primary/50'
+                    ? 'bg-surface-container-high border-primary/30'
                     : 'bg-surface-container-low border-transparent hover:bg-surface-container-high hover:border-outline-variant/30'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <div className={`${selectedRoute?.id === route.id ? 'bg-secondary-container text-on-secondary-container' : 'bg-surface-variant text-on-surface-variant'} w-10 h-10 rounded-full flex items-center justify-center font-headline-md text-headline-md`}>
+                <div className="flex items-center gap-2.5">
+                  <div className={`${selectedRoute?.id === route.id ? 'bg-primary text-on-primary' : 'bg-surface-variant text-on-surface-variant'} w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-colors`}>
                     {route.number}
                   </div>
                   <div>
-                    <div className="font-label-lg text-label-lg text-on-surface">{route.name}</div>
-                    <div className="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
-                      <span className="material-symbols-outlined text-[14px]">schedule</span>
-                      Каждые {route.frequencyMinutes} мин
+                    <div className="font-semibold text-sm text-on-surface leading-tight">{route.name}</div>
+                    <div className="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
+                      <span className="material-symbols-outlined text-[12px]">schedule</span>
+                      каждые 15 мин
                     </div>
                   </div>
                 </div>
-                <span className={`material-symbols-outlined text-primary transition-opacity ${selectedRoute?.id === route.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>chevron_right</span>
+                <span className={`material-symbols-outlined text-primary text-[18px] transition-opacity ${selectedRoute?.id === route.id ? 'opacity-100' : 'opacity-0 group-hover:opacity-60'}`}>chevron_right</span>
               </button>
             ))}
           </div>
         </div>
       </aside>
 
-      {}
-      <section className="flex-grow flex flex-col gap-md">
+      {/* === MAIN CONTENT === */}
+      <section className="flex-grow flex flex-col gap-4 min-w-0">
         {!selectedRoute && (
-          <div className="flex-grow flex items-center justify-center">
-            <div className="text-center text-on-surface-variant">
+          <div className="flex-grow flex items-center justify-center py-20">
+            <div className="text-center text-on-surface-variant animate-fade-in">
               <span className="material-symbols-outlined text-[64px] block mb-4 text-outline">schedule</span>
-              <p className="font-headline-md text-headline-md">Выберите маршрут</p>
-              <p className="font-body-md text-body-md mt-2">Выберите маршрут из списка слева для просмотра расписания</p>
+              <p className="text-xl font-bold">Выберите маршрут</p>
+              <p className="text-sm mt-2 text-on-surface-variant/70">Выберите маршрут из списка слева</p>
             </div>
           </div>
         )}
 
         {selectedRoute && schedule && (
           <>
-            {}
-            <div className="bg-surface-container-highest/80 backdrop-blur-xl rounded-xl p-md border border-outline-variant/20 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+            {/* Route header card */}
+            <div className="bg-surface-container-highest/80 backdrop-blur-xl rounded-2xl p-4 md:p-5 border border-outline-variant/20 relative overflow-hidden animate-slide-up">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
               <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div className="flex items-center gap-md">
-                  <div className="bg-primary text-on-primary w-16 h-16 rounded-2xl flex items-center justify-center font-headline-xl text-headline-xl shadow-lg shadow-primary/20">
+                <div className="flex items-center gap-4">
+                  <div className="bg-primary text-on-primary w-14 h-14 rounded-2xl flex items-center justify-center font-bold text-xl shadow-lg shadow-primary/20 flex-shrink-0">
                     {schedule.route.number}
                   </div>
                   <div>
-                    <h1 className="font-headline-lg text-headline-lg text-on-surface">{schedule.route.name}</h1>
-                    <div className="flex items-center gap-4 mt-1">
-                      <span className="bg-secondary/20 text-secondary px-2 py-1 rounded font-label-sm text-label-sm flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[14px]">{transportIcons[schedule.route.type]}</span>
+                    <h1 className="text-lg md:text-xl font-bold text-on-surface leading-tight">{schedule.route.name}</h1>
+                    <div className="flex flex-wrap items-center gap-3 mt-1">
+                      <span className="bg-secondary/20 text-secondary px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1">
+                        <span className="material-symbols-outlined text-[13px]">{transportIcons[schedule.route.type]}</span>
                         {transportLabels[schedule.route.type]}
                       </span>
-                      <span className="text-on-surface-variant font-body-md text-body-md flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[18px]">update</span>
-                        Каждые {schedule.route.frequencyMinutes} мин
+                      <span className="text-on-surface-variant text-xs flex items-center gap-1">
+                        <span className="material-symbols-outlined text-[15px]">update</span>
+                        каждые 15 мин
                       </span>
                     </div>
                   </div>
                 </div>
-                <div className="flex gap-2 w-full sm:w-auto">
-                  <button
-                    onClick={() => addToFavorites(selectedRoute.id)}
-                    className="bg-surface-variant hover:bg-surface-container-high text-on-surface p-2 rounded-lg transition-colors border border-outline-variant/30 flex items-center justify-center"
-                  >
-                    <span className="material-symbols-outlined">favorite_border</span>
-                  </button>
-                </div>
+                <button
+                  onClick={() => addToFavorites(selectedRoute.id)}
+                  className="btn-icon bg-surface-variant hover:bg-surface-container-high text-on-surface p-2.5 rounded-xl border border-outline-variant/30 flex items-center justify-center"
+                >
+                  <span className="material-symbols-outlined">favorite_border</span>
+                </button>
               </div>
             </div>
 
-            {}
-            <div className="bg-surface-container rounded-xl border border-outline-variant/30 flex-grow flex flex-col">
-              {}
-              <div className="border-b border-outline-variant/30 p-sm flex gap-2 overflow-x-auto hide-scrollbar">
+            {/* Schedule card */}
+            <div className="bg-surface-container rounded-2xl border border-outline-variant/30 flex-grow flex flex-col overflow-hidden">
+              {/* Period filter tabs */}
+              <div className="border-b border-outline-variant/30 p-3 flex gap-2 overflow-x-auto hide-scrollbar">
                 {periods.map(p => (
                   <button
                     key={p.id}
                     id={`period-${p.id}`}
                     onClick={() => changePeriod(p.id)}
-                    className={`px-4 py-1.5 rounded-full font-label-lg text-label-lg whitespace-nowrap transition-colors ${
+                    className={`btn-chip px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap ${
                       period === p.id ? 'bg-primary text-on-primary' : 'bg-surface-variant text-on-surface-variant hover:text-on-surface'
                     }`}
                   >
@@ -189,22 +192,24 @@ export default function Schedules() {
                 ))}
               </div>
 
-              {}
-              <div className="p-md flex flex-col gap-0 relative">
-                <div className="absolute left-[47px] top-md bottom-md w-[2px] bg-outline-variant/30 z-0 hidden sm:block"></div>
+              {/* Stops timeline */}
+              <div className="p-4 flex flex-col gap-0 relative overflow-y-auto custom-scrollbar">
+                <div className="absolute left-[63px] top-4 bottom-4 w-[2px] bg-outline-variant/30 z-0 hidden sm:block"></div>
 
                 {loading && (
-                  <div className="text-center py-8 text-on-surface-variant">Загрузка расписания...</div>
+                  <div className="text-center py-10 text-on-surface-variant flex items-center justify-center gap-2">
+                    <span className="material-symbols-outlined animate-spin">progress_activity</span>
+                    Загрузка расписания...
+                  </div>
                 )}
 
                 {!loading && schedule.departures.length === 0 && (
-                  <div className="text-center py-8 text-on-surface-variant font-body-md text-body-md">
+                  <div className="text-center py-10 text-on-surface-variant text-sm">
                     Нет рейсов в выбранный период
                   </div>
                 )}
 
                 {!loading && schedule.stops.map((stopName, stopIdx) => {
-                  
                   const nextDep = schedule.departures.find(d => d.isCurrent) || schedule.departures[0];
                   const time = nextDep?.stopTimes?.[stopIdx]?.time;
                   const isFirst = stopIdx === 0;
@@ -212,50 +217,46 @@ export default function Schedules() {
                   const isCurrent = nextDep?.isCurrent && stopIdx === 1;
 
                   return (
-                    <div key={stopIdx} className={`flex flex-col sm:flex-row gap-4 sm:gap-lg py-sm relative z-10 ${isFirst || (stopIdx < 1) ? 'opacity-60' : ''}`}>
-                      <div className={`w-full sm:w-24 flex sm:flex-col justify-between sm:justify-start items-center sm:items-end pt-1 ${
-                        isCurrent ? 'text-primary font-headline-md text-headline-md' : 'text-on-surface-variant font-body-lg text-body-lg'
+                    <div key={stopIdx} className={`flex flex-col sm:flex-row gap-3 sm:gap-6 py-3 relative z-10 ${isFirst ? 'opacity-60' : ''}`}>
+                      <div className={`w-full sm:w-16 flex sm:flex-col justify-between sm:justify-start items-center sm:items-end pt-0.5 ${
+                        isCurrent ? 'text-primary font-bold text-lg' : 'text-on-surface-variant text-sm'
                       }`}>
                         <span>{time || '—'}</span>
                         {isCurrent && (
-                          <span className="text-error font-label-sm text-label-sm sm:mt-1 flex items-center gap-1">
-                            <span className="material-symbols-outlined text-[14px]">radio_button_checked</span> Следующая
+                          <span className="text-error text-xs sm:mt-1 flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[13px]">radio_button_checked</span>Следующая
                           </span>
                         )}
                       </div>
 
-                      <div className={`hidden sm:flex items-center justify-center w-6 h-6 rounded-full border-2 mt-1 ${
-                        isFirst ? 'bg-surface border-outline-variant' :
-                        isLast ? 'bg-surface border-outline-variant' :
-                        isCurrent ? 'bg-surface border-primary relative' :
-                        'bg-surface border-outline-variant'
+                      <div className={`hidden sm:flex items-center justify-center w-5 h-5 rounded-full border-2 mt-1 ${
+                        isCurrent ? 'bg-surface border-primary' : 'bg-surface border-outline-variant'
                       }`}>
                         {isCurrent && <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>}
-                        {isLast && <span className="material-symbols-outlined text-[16px] text-outline-variant">flag</span>}
+                        {isLast && <span className="material-symbols-outlined text-[13px] text-outline-variant">flag</span>}
                       </div>
 
-                      <div className={`flex-grow rounded-lg p-sm border ${
-                        isCurrent
-                          ? 'bg-secondary-container/20 border-primary/30 shadow-[0_0_15px_rgba(255,181,153,0.1)]'
-                          : isFirst ? 'bg-surface-container-high border-outline-variant/20'
-                          : 'bg-surface-container-low border-outline-variant/10'
+                      <div className={`flex-grow rounded-xl p-3 border ${
+                        isCurrent ? 'bg-secondary-container/20 border-primary/30 shadow-[0_0_12px_rgba(255,181,153,0.1)]' :
+                        isFirst ? 'bg-surface-container-high border-outline-variant/20' :
+                        'bg-surface-container-low border-outline-variant/10'
                       }`}>
-                        <h4 className="font-headline-md text-headline-md text-on-surface">{stopName}</h4>
-                        {isFirst && <div className="text-on-surface-variant font-body-md text-body-md mt-1">Начальная остановка</div>}
-                        {isLast && <div className="text-tertiary font-body-md text-body-md mt-1">Конечная остановка</div>}
+                        <h4 className="font-semibold text-sm md:text-base text-on-surface">{stopName}</h4>
+                        {isFirst && <div className="text-on-surface-variant text-xs mt-0.5">Начальная остановка</div>}
+                        {isLast  && <div className="text-tertiary text-xs mt-0.5">Конечная остановка</div>}
                       </div>
                     </div>
                   );
                 })}
               </div>
 
-              {}
+              {/* All departures */}
               {!loading && schedule.departures.length > 0 && (
-                <div className="border-t border-outline-variant/30 p-md">
-                  <h3 className="font-label-lg text-label-lg text-on-surface-variant mb-sm">Все отправления</h3>
-                  <div className="flex flex-wrap gap-xs">
+                <div className="border-t border-outline-variant/30 p-4">
+                  <h3 className="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3">Все отправления</h3>
+                  <div className="flex flex-wrap gap-1.5">
                     {schedule.departures.slice(0, 40).map((dep, i) => (
-                      <span key={i} className={`font-label-sm text-label-sm px-2 py-1 rounded ${
+                      <span key={i} className={`text-xs font-semibold px-2.5 py-1 rounded-lg ${
                         dep.isCurrent ? 'bg-primary text-on-primary' : 'bg-surface-variant text-on-surface-variant'
                       }`}>
                         {dep.departure}

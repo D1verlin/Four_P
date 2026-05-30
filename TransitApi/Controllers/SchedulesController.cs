@@ -57,7 +57,7 @@ public class SchedulesController : ControllerBase
             return new
             {
                 Departure = dep.ToString("HH:mm"),
-                IsCurrent = dep >= now && dep <= now.AddMinutes(route.FrequencyMinutes),
+                IsCurrent = dep >= now && dep <= now.AddMinutes(15),
                 StopTimes = stopTimes
             };
         }).ToList();
@@ -67,8 +67,7 @@ public class SchedulesController : ControllerBase
             Route = new
             {
                 route.Id, route.Number, route.Name,
-                Type = route.Type.ToString(),
-                route.StartStop, route.EndStop, route.FrequencyMinutes
+                Type = route.Type.ToString()
             },
             Stops = stops.Select(s => s.Name).ToList(),
             Departures = departures

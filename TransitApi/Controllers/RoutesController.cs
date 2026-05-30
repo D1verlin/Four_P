@@ -25,8 +25,7 @@ public class RoutesController : ControllerBase
             .Select(r => new
             {
                 r.Id, r.Number, r.Name,
-                Type = r.Type.ToString(),
-                r.StartStop, r.EndStop, r.FrequencyMinutes
+                Type = r.Type.ToString()
             })
             .ToListAsync();
         return Ok(routes);
@@ -47,12 +46,11 @@ public class RoutesController : ControllerBase
         {
             route.Id, route.Number, route.Name,
             Type = route.Type.ToString(),
-            route.StartStop, route.EndStop, route.FrequencyMinutes,
             Stops = route.RouteStops
                 .OrderBy(rs => rs.Order)
                 .Select(rs => new
                 {
-                    rs.StopId, rs.Stop.Name, rs.Stop.Address,
+                    rs.StopId, rs.Stop.Name,
                     rs.Order, rs.OffsetMinutes
                 })
         });
@@ -68,7 +66,7 @@ public class RoutesController : ControllerBase
             .OrderBy(rs => rs.Order)
             .Select(rs => new
             {
-                rs.StopId, rs.Stop.Name, rs.Stop.Address,
+                rs.StopId, rs.Stop.Name,
                 rs.Order, rs.OffsetMinutes
             })
             .ToListAsync();
