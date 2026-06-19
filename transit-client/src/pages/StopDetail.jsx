@@ -71,22 +71,6 @@ export default function StopDetail() {
           <h1 className="text-xl md:text-2xl font-bold text-on-surface leading-tight">
             {stop ? `Остановка «${stop.name}»` : 'Загрузка...'}
           </h1>
-          {stop && (
-            <button
-              className="btn-icon text-primary hover:text-primary-fixed ml-auto"
-              onClick={() => {
-                const saved = JSON.parse(localStorage.getItem('favStops') || '[]');
-                if (!saved.includes(stop.id)) {
-                  localStorage.setItem('favStops', JSON.stringify([...saved, stop.id]));
-                  showToast('Остановка добавлена в избранное!', 'success');
-                } else {
-                  showToast('Остановка уже в избранном!', 'info');
-                }
-              }}
-            >
-              <span className="material-symbols-outlined">favorite_border</span>
-            </button>
-          )}
         </div>
       </header>
 

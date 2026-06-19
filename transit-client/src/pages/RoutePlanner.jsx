@@ -30,9 +30,10 @@ export default function RoutePlanner() {
 
   const filterStops = (q) => {
     if (!q || q.length < 1) return [];
+    const queryLower = q.toLowerCase();
     return stops.filter(s =>
-      s.name.toLowerCase().includes(q.toLowerCase()) ||
-      s.address.toLowerCase().includes(q.toLowerCase())
+      (s.name && s.name.toLowerCase().includes(queryLower)) ||
+      (s.address && s.address.toLowerCase().includes(queryLower))
     ).slice(0, 6);
   };
 
@@ -52,11 +53,13 @@ export default function RoutePlanner() {
     let resolvedFromId = fromId;
     let resolvedToId = toId;
     if (!resolvedFromId && fromSearch) {
-      const match = stops.find(s => s.name.toLowerCase() === fromSearch.toLowerCase());
+      const searchLower = fromSearch.toLowerCase();
+      const match = stops.find(s => s.name && s.name.toLowerCase() === searchLower);
       if (match) resolvedFromId = match.id;
     }
     if (!resolvedToId && toSearch) {
-      const match = stops.find(s => s.name.toLowerCase() === toSearch.toLowerCase());
+      const searchLower = toSearch.toLowerCase();
+      const match = stops.find(s => s.name && s.name.toLowerCase() === searchLower);
       if (match) resolvedToId = match.id;
     }
     if (!resolvedFromId || !resolvedToId) { setError('Выберите остановки из списка'); return; }

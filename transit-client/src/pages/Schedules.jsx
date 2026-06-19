@@ -209,45 +209,72 @@ export default function Schedules() {
                   </div>
                 )}
 
-                {!loading && schedule.stops.map((stopName, stopIdx) => {
+                {!loading && (() => {
                   const nextDep = schedule.departures.find(d => d.isCurrent) || schedule.departures[0];
-                  const time = nextDep?.stopTimes?.[stopIdx]?.time;
-                  const isFirst = stopIdx === 0;
-                  const isLast = stopIdx === schedule.stops.length - 1;
-                  const isCurrent = nextDep?.isCurrent && stopIdx === 1;
+                  let nextStopIdx = -1;
+                  if (nextDep && nextDep.departure) {
+                    const now = new Date();
+                    let nowMins = now.getHours() * 60 + now.getMinutes();
+                    const [depH, depM] = nextDep.departure.split(':').map(Number);
+                    const depMins = depH * 60 + depM;
+                    if (nowMins < depMins && depMins - nowMins > 600) nowMins += 1440;
 
-                  return (
-                    <div key={stopIdx} className={`flex flex-col sm:flex-row gap-3 sm:gap-6 py-3 relative z-10 ${isFirst ? 'opacity-60' : ''}`}>
-                      <div className={`w-full sm:w-16 flex sm:flex-col justify-between sm:justify-start items-center sm:items-end pt-0.5 ${
-                        isCurrent ? 'text-primary font-bold text-lg' : 'text-on-surface-variant text-sm'
-                      }`}>
-                        <span>{time || '—'}</span>
-                        {isCurrent && (
-                          <span className="text-error text-xs sm:mt-1 flex items-center gap-1">
-                            <span className="material-symbols-outlined text-[13px]">radio_button_checked</span>Следующая
-                          </span>
-                        )}
-                      </div>
+                    for (let i = 0; i < nextDep.stopTimes.length; i++) {
+                      const timeStr = nextDep.stopTimes[i].time;
+                      if (!timeStr) continue;
+                      const [h, m] = timeStr.split(':').map(Number);
+                      let stopMins = h * 60 + m;
+                      if (stopMins < depMins) stopMins += 1440;
+                      if (stopMins >= nowMins) {
+                        nextStopIdx = i;
+                        break;
+                      }
+                    }
+                  }
 
-                      <div className={`hidden sm:flex items-center justify-center w-5 h-5 rounded-full border-2 mt-1 ${
-                        isCurrent ? 'bg-surface border-primary' : 'bg-surface border-outline-variant'
-                      }`}>
-                        {isCurrent && <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>}
-                        {isLast && <span className="material-symbols-outlined text-[13px] text-outline-variant">flag</span>}
-                      </div>
+                  return schedule.stops.map((stopName, stopIdx) => {
+                    const time = nextDep?.stopTimes?.[stopIdx]?.time;
+                    const isFirst = stopIdx === 0;
+                    const isLast = stopIdx === schedule.stops.length - 1;
+                    const isCurrent = nextDep?.isCurrent && stopIdx === nextStopIdx;
 
-                      <div className={`flex-grow rounded-xl p-3 border ${
-                        isCurrent ? 'bg-secondary-container/20 border-primary/30 shadow-[0_0_12px_rgba(255,181,153,0.1)]' :
-                        isFirst ? 'bg-surface-container-high border-outline-variant/20' :
-                        'bg-surface-container-low border-outline-variant/10'
-                      }`}>
-                        <h4 className="font-semibold text-sm md:text-base text-on-surface">{stopName}</h4>
-                        {isFirst && <div className="text-on-surface-variant text-xs mt-0.5">Начальная остановка</div>}
-                        {isLast  && <div className="text-tertiary text-xs mt-0.5">Конечная остановка</div>}
+                    return (
+                      <div key={stopIdx} className={`flex flex-col sm:flex-row gap-3 sm:gap-6 py-3 relative z-10 ${isFirst && !isCurrent ? 'opacity-60' : ''}`}>
+                        <div className={`w-full sm:w-16 flex sm:flex-col justify-between sm:justify-start items-center sm:items-end pt-3 ${
+                          isCurrent ? 'text-primary font-extrabold text-lg' : 'text-on-surface-variant text-sm'
+                        }`}>
+                          <span>{time || '—'}</span>
+                          {isCurrent && (
+                            <span className="text-primary text-xs sm:mt-1 flex items-center gap-0.5 font-bold animate-pulse">
+                              <span className="material-symbols-outlined text-[14px]">directions_bus</span>След.
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="hidden sm:flex items-start justify-center w-5 pt-3.5 flex-shrink-0">
+                          <div className={`w-5 h-5 rounded-full border-2 transition-all flex items-center justify-center ${
+                            isCurrent ? 'bg-primary/20 border-primary scale-110 shadow-lg' : 'bg-surface border-outline-variant'
+                          }`}>
+                            {isCurrent && <div className="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></div>}
+                            {isLast && <span className="material-symbols-outlined text-[13px] text-outline-variant">flag</span>}
+                          </div>
+                        </div>
+
+                        <div className={`flex-grow rounded-xl p-3 border relative overflow-hidden transition-all ${
+                          isCurrent ? 'bg-primary text-on-primary border-primary shadow-lg shadow-primary/20' :
+                          isFirst ? 'bg-surface-container-high border-outline-variant/20 text-on-surface' :
+                          'bg-surface-container-low border-outline-variant/10 text-on-surface'
+                        }`}>
+                          <h4 className={`font-semibold text-sm md:text-base ${isCurrent ? 'text-on-primary' : 'text-on-surface'}`}>
+                            {stopName}
+                          </h4>
+                          {isFirst && <div className={`${isCurrent ? 'text-on-primary/80' : 'text-on-surface-variant'} text-xs mt-0.5`}>Начальная остановка</div>}
+                          {isLast  && <div className={`${isCurrent ? 'text-on-primary/80' : 'text-tertiary'} text-xs mt-0.5`}>Конечная остановка</div>}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  });
+                })()}
               </div>
 
               {/* All departures */}

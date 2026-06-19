@@ -5,6 +5,13 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' }
 });
 
+api.interceptors.request.use(config => {
+  if (config.method === 'get') {
+    config.params = { ...config.params, _t: Date.now() };
+  }
+  return config;
+});
+
 export const routesApi = {
   getAll: (type) => api.get('/routes', { params: type ? { type } : {} }),
   getById: (id) => api.get(`/routes/${id}`),
